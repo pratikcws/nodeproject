@@ -1,0 +1,38 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+<section id="contact-page">
+	<div class="container">
+		<h2>Conatct Us</h2>
+		<div class="row">
+			<form action="#" name="contactus" id="contactus">
+				<div class="col-lg-6 col-sm-6">
+					<div class="form-group">
+						<input type="text" name="name" class="form-control" placeholder="Full Name">
+					</div>
+					<div class="form-group">
+						<input type="email" name="email" class="form-control" placeholder="Email">
+					</div>
+
+					<div class="form-group">
+						<input type="text" name="subject" class="form-control" placeholder="Title">
+					</div>
+
+				</div>
+				<div class="col-lg-6 col-sm-6">
+					<div class="form-group">
+						<textarea name="message" class="form-control" placeholder="Messsage"></textarea>
+					</div>
+					<div class="form-action text-right">
+						<button type="submit" class="btn btn-primary"> Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+
+
+<%- include ../layouts/footer.ejs %>
+<script src="<%= site_url('front/custom/js/index/contactus.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/update_profile.js') %>"></script>

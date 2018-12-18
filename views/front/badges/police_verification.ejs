@@ -1,0 +1,96 @@
+<%- include ../layouts/header.ejs %>
+<style>
+.badgecontent{
+background-color: #fff;
+    margin: 15px auto;
+    border-radius: 2px;
+    border: 1px solid #cad7dc;
+    box-sizing: border-box;
+    padding: 15px;
+	}
+</style>
+<%- include ../functions.ejs %>
+        <section class="badges-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="well well-lg">
+					<img src="<%= site_url('front/assets/images/police-badge.svg') %>" title="" class="badge-logo center-block">
+					<h2 class="text-center">Police Check Badge</h2>
+					<h5>Apply for a Police Check Badge</h5>
+					<p>On Expertie trust is extremely important to a Job Poster when they’re considering people to complete their task. The Police Check Badge not only adds another verification on your profile, but also helps you to stand out when making offers on tasks.</p>
+					<p>Register your interest below to get started!</p>
+					<p>We’ll send you an email with an invite to apply for a Police Check Badge and to explain what to do next.</p>
+					<p>You can learn more about the <a class="link" href="#">Police Check Badge.</a></p>
+					<div class="badge-application">
+					<h5>Police Check Badge Registration of Interest</h5>
+						<form name="policeverification" id="policeverification">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="u_first_name">First Name</label>
+										<input type="text" class="form-control" name="u_first_name" id="u_first_name">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="u_last_name">Last Name</label>
+										<input type="text" class="form-control" name="u_last_name" id="u_last_name">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group number-group">
+										<label for="dob">Date of Birth</label>
+										<input id="dob" name="dob"  style="width:100%";>
+									</div>
+								</div>								
+							</div>
+							<div class="anchovy-form-item left note full-width">
+								
+								<p ><i class="fas fa-info-circle"></i> Please make sure this information is the same as your driver’s licence or passport. These details cannot be changed after verification unless you contact us.</p>
+							</div>
+							<div class="checkbox">
+						    <label>
+						      <input type="checkbox"> By submitting this registration of interest for the Expertie Police Check Badge, you agree and consent to our collection, use and disclosure of your sensitive information (if any) in accordance with our Privacy Policy, including receiving such information from a third party verification provider and using it in the form of the Police Check Badge on the Expertie Platform.
+						    </label>
+						  </div>
+						  <button type="submit" class="btn btn--primary btn--rounded">Submit</button>
+						</form>
+					</div>
+					<h5>More information</h5>
+					<p>Please note that conditions apply in relation to the Police Check Badge, which are outlined in the <a class="link" target="_blank" href="#">Expertie Terms &amp; Conditions</a>.</p>
+					<p>Please read the <a class="link" target="_blank" href="#">important notes</a> regarding the application for the Police Check Badge.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+		
+		
+		
+<!-- Modal -->
+	
+<script>
+
+</script>
+
+
+<%- include ../layouts/footerscripts.ejs %>
+
+
+
+
+<script src="https://cdn.rawgit.com/atatanasov/gijgo/master/dist/combined/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://cdn.rawgit.com/atatanasov/gijgo/master/dist/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="<%- site_url('front/custom/js/badges/index.js') %>"></script>
+
+<script>
+$(document).ready(function () {
+    $('#dob').datepicker({
+      uiLibrary: 'bootstrap'
+    });
+});
+</script>

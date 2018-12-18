@@ -1,0 +1,45 @@
+<%- include ../layouts/adminheader.ejs %>
+<%- include ../layouts/adminsidebar.ejs %>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <div class="pull-left">
+                            <h3 class="box-title">Payment Request</h3>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-default back_to_history"> <span class="fa fa-arrow-left"> Go Back</a>
+                            <a href="" class="btn btn-default refreshlist"> <span class="fa fa-refresh"></a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                   <table id="example" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                  <th> Sr. No. </th> 
+                                  <th> User Id </th>
+                                  <th> Account Holder Name </th>
+                                  <th> BsB </th>
+                                  <th> Account Number </th>
+                                  <th> Amount </th>
+                                  
+                                </tr>
+                            </thead>
+        
+    </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+
+<script src="../../admin/custom/paymentrequest/list.js"></script>
+
+<%- include ../layouts/adminfooter.ejs %>

@@ -1,0 +1,229 @@
+<%- include ../layouts/header.ejs %>
+<style>
+.price {
+    font-size: 40px;
+    font-weight: 700;
+}
+</style>
+		<section class="page-title style1 parallax parallax1">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="wrap-box-search style1">
+							<form action="#" method="get" accept-charset="utf-8">
+								<span>
+									<input type="text" placeholder="What are you looking for ?" name="search">
+								</span>
+								<span class="location">
+									<span class="ti-location-pin"></span>
+									<input type="text" placeholder="Location" name="location">
+								</span>
+								<span class="categories">
+									<span class="ti-angle-down"></span>
+									<select name="categories">
+										<option value="">All Categories</option>
+										<option value="">All Categories</option>
+										<option value="">All Categories</option>
+									</select>
+								</span>
+								<button type="submit" class="search-btn">Search</button>
+							</form><!-- /form -->
+						</div><!-- /.wrap-box-search -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+			<div class="overlay"></div>
+		</section><!-- /.page-title -->
+<div class="row">
+<div class="col-md-12">
+		<section class="flat-row flat-imagebox style3">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="filter style2">
+							<div class="filter-title">
+								<h5>Filter by tag:</h5>
+								<span class="ti-angle-down"></span>
+							</div>
+							<div class="clearfix"></div>
+							<div	 class="select-filter">
+								<ul class="list-filter quarter">
+									<li class="active">
+										<span class="ti-check-box"></span>Wireless Internet
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Street Parking
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Kitchen
+									</li>
+									<li class="active">
+										<span class="ti-check-box"></span>Bike Parking
+									</li>
+								</ul>
+								<ul class="list-filter quarter">
+									<li>
+										<span class="ti-layout-width-full"></span>Pets Friendly
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Cable TV
+									</li>
+									<li class="active">
+										<span class="ti-check-box"></span>Smoking Allowed
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Good for Kids
+									</li>
+								</ul>
+								<ul class="list-filter quarter">
+									<li>
+										<span class="ti-layout-width-full"></span>Pool
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Washer
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Hair Dryer
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Wheelchair Accessible
+									</li>
+								</ul>
+								<ul class="list-filter quarter">
+									<li>
+										<span class="ti-layout-width-full"></span>Ultra High End
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Pricey
+									</li>
+									<li class="active">
+										<span class="ti-check-box"></span>Most Reviewed
+									</li>
+									<li>
+										<span class="ti-layout-width-full"></span>Highest Rated
+									</li>
+								</ul>
+								<div class="clearfix"></div>
+							</div><!-- /.select-filter -->
+						</div><!-- /.filter -->
+						<div class="filter-result style2">
+							<div class="result">
+								5 Results Found
+							</div>
+							<ul class="arrange">
+								<li class="active">
+									<span class="ti-view-grid"></span>
+								</li>
+								<li>
+									<span class="ti-view-list"></span>
+								</li>
+							</ul>
+						</div><!-- /.filter-result -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+				<div class="wrap-imagebox style3">
+					<div class="row">
+				
+					
+					
+					<% result.forEach(function(data) { %>
+					
+					
+						<div class="col-sm-12">
+							<div class="imagebox style2">
+								<div class="box-imagebox">
+									<div class="box-header">
+										<div class="box-image">
+											<img src="<%= site_url('front/custom/images/page/img-v2-01.png') %>" alt="">
+											<a href="#" title="">Preview</a>
+										</div>
+									</div><!-- /.box-header -->
+									<div class="box-content">
+										<div class="box-title ad">
+											<span>Ad</span>
+											<a href="<%= site_url('post/details/'+data._id) %>">
+											<%= data.title %> </a><i class="fa fa-check-circle" aria-hidden="true"></i>
+											<div class="queue">
+											<div class="price">
+											<%if (data.price!==undefined) { %>
+											&#x20b9; 
+											<%= data.price %>
+											<% } %>
+											
+											</div>
+												
+											</div>
+										</div>
+										<ul class="rating">
+											<li>5 rating</li>
+											<li><%= data.category %></li>
+											<li>Restaurant</li>
+										</ul>
+										<div class="box-desc">
+											<%= data.description %>  
+										</div>
+										<ul class="location">
+											<li class="address"><span class="ti-location-pin"></span>
+											<%= data.address %>
+											</li>
+											<li class="closed">Closed Now !</li>
+										</ul>
+									</div><!-- /.box-content -->
+								</div><!-- /.box-imagebox -->
+							</div><!-- /.imagebox style2 -->
+						</div><!-- /.col-sm-12 -->
+						
+						
+						
+						
+						
+						
+						 <% }) %>
+						
+						
+						
+						
+						
+						
+						
+						
+					</div><!-- /.row -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="btn-more">
+								<a href="#" title="">Show More</a>
+							</div>
+						</div>
+					</div><!-- /.row -->
+				</div>
+			</div><!-- /.container -->
+		</section><!-- /.flat-imagebox style3 -->
+     </div>
+	 </div>
+	 </div>
+		<section class="flat-row flat-subscribe">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-7">
+						<div class="subscribe-text">
+							Subscribe and be notified about new locations
+						</div>
+					</div><!-- /.col-sm-7 -->
+					<div class="col-sm-5">
+						<div class="subscribe-form">
+							<form action="#" method="get" accept-charset="utf-8">
+								<div class="subscribe-content">
+									<div class="input-field">
+										<input type="email" name="yourEmail" placeholder="Your Email" />
+									</div>
+									<button><span class="arrow_right"></span></button>
+								</div>
+							</form>
+						</div><!-- /.subscribe-form -->
+					</div><!-- /.col-sm-5 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-subscibe -->
+
+		<%- include ../layouts/footer.ejs %>
+		<script src="../../front/post/submitlisting.js"></script>

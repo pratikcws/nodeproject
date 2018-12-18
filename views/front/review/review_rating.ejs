@@ -1,0 +1,66 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+
+<section class="box-section">
+		<div class="container">
+			<div class="row ">
+				<div class="col-md-6 col-md-offset-3">
+					
+					
+					<% if(data.awarded_to.equals(req.session.Auth._id) ) { %>
+						<h4 class="text-center"><%= data.title %> (<a href="<%= site_url('profile/') %><%-data.user_id.first_name %><%-data.user_id.last_name %>/<%-data.user_id._id %>"><%-data.user_id.first_name +" " +data.user_id.last_name %></a>)</h4>	
+						
+					
+					<% } else { %>
+						
+						<h4 class="text-center"><%= data.title %> (<a href="<%= site_url('profile/') %><%-data.awarded_to.first_name %><%-data.awarded_to.last_name %>/<%-data.awarded_to._id %>"><%-data.awarded_to.first_name  +" " + data.awarded_to.last_name %></a>)</h4> 
+						
+					<% } %>
+					<%if(!reviewrating){ %>
+					<form  action="<%- site_url('post/reviewrating') %>" method="post">
+						<div class="form-group">
+						<label for="comment">Rating :</label>
+							<br>
+							<div id="starrating" start="1"></div>
+						</div>
+							<input type="hidden" id="rating" name="rating" value="1">
+							<% if(data.awarded_to.equals(req.session.Auth._id) ) { %>
+								<input type="hidden" name="to_id" value="<%= data.user_id._id %>" >
+								<input type="hidden" name="review_for" value="1" >
+							<% } else { %>
+								<input type="hidden" name="to_id" value="<%= data.awarded_to._id %>" >
+								<input type="hidden" name="review_for" value="2" >
+							<% } %>
+							<input type="hidden" name="post_id" value="<%= data._id %>" >
+							<div class="form-group">
+								<label for="comment">Comment:</label>
+								<textarea name="review" class="form-control" rows="5" id="comment"></textarea>
+							</div>
+						<input type="submit" value="submit" class="btn btn-info">
+					  </form>
+					  <% } else{ %>
+						<div class="alert alert-warning">
+								<strong>Warning!</strong> Your Review already subitted.
+							  </div>
+					<% } %>
+			</div>
+	   </div>
+	</section>
+
+<%- include ../layouts/footer.ejs %>
+<script type="text/javascript" src="<%- site_url('front/custom/js/rating/rating.js') %>"></script>
+<script>
+$(document).ready(function(){
+	$('#starrating').jsRapStar({colorFront:'#ffffff',length:5,starHeight:32,step:true,
+		onClick:function(score){
+			$(this)[0].StarF.css({color:'yellow'});
+			$('#rating').val(score);
+			
+		},
+		onMousemove:function(score){
+			$(this).attr('title',score);
+		}
+	});
+});
+</script>
+

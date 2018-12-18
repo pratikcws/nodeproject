@@ -1,0 +1,89 @@
+<%- include ../layouts/adminheader.ejs %>
+<%- include ../layouts/adminsidebar.ejs %>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <form waiter="form" id="assognFrm" name="assognFrm">
+                        <div class="box-header">
+                            <div class="pull-left">
+                                <h3 class="box-title">Table List to Assign</h3>
+                            </div>
+                            <div class="pull-right">
+                                <a href="#" class="btn btn-default back_to_history"> <span class="fa fa-arrow-left"> Go Back</a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="nav">
+                                        <li>
+                                            <label>Name: <%= waiter[0].user_name %></label>
+                                        </li>
+                                        <li>
+                                            <label>Email: <%= waiter[0].email %></label>
+                                        </li>
+                                        <li>
+                                            <label>Mobile: +<%= waiter[0].phone_prefix+'-'+waiter[0].mobile_no %></label>
+                                        </li>
+                                        <li>
+                                            <label>Hotel: <%= waiter[0].hoteldata[0].hotel_name %></label>
+                                        </li>
+                                        <li>
+                                            <label>Branch: <%= waiter[0].hotelbranchdata[0].branch_name %></label>
+                                        </li>
+                                    </ul>
+                                </div>  
+                            </div>
+                            <div class="table-responsive">
+                                <table id="example" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="" >Sr. No.</th> 
+                                            <th class="" >Hotel</th>
+                                            <th class="" >Branch</th>
+                                            <th class="" >Zone</th>
+                                            <th class="" >Table</th>
+                                            <th class="" >Assign</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(var i = 0 ; i < branch_tables.length;i++){ %>
+                                            <tr>
+                                                <td><%= i + 1 %></td>
+                                                <td><%= branch_tables[i].hoteldata[0].hotel_name %></td>
+                                                <td><%= branch_tables[i].hotelbranchdata[0].branch_name %></td>
+                                                <td><%= branch_tables[i].zonedata[0].zone_name %></td>
+                                                <td><%= branch_tables[i].table_name %></td>
+                                                <td>
+                                                    <input type="hidden" name="assign[<%= i %>][waiter_id]" id="" value="<%= waiter[0]._id %>" />
+                                                    <input type="hidden" name="assign[<%= i %>][hotel_id]" id="" value="<%= branch_tables[i].hoteldata[0]._id %>" />
+                                                    <input type="hidden" name="assign[<%= i %>][hotel_branch_id]" id="" value="<%= branch_tables[i].hotelbranchdata[0]._id %>" />
+                                                    <input type="hidden" name="assign[<%= i %>][zone_id]" id="" value="<%= branch_tables[i].zonedata[0]._id %>" />
+
+                                                    <input type="checkbox" name="assign[<%= i %>][table_id]" id="" value="<%= branch_tables[i]._id %>" />
+
+                                                    <label><%=
+                                                        assined_tables.indexOf(branch_tables[i]._id)
+                                                    %></label>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success submtBtn" id="submtBtn" value="Submit"> 
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+<script src="../../admin/custom/waiter/assign.js"></script>
+
+<%- include ../layouts/adminfooter.ejs %>

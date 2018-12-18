@@ -1,0 +1,94 @@
+<%- include ../layouts/adminheader.ejs %>
+<%- include ../layouts/adminsidebar.ejs %>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <div class="pull-left">
+                            <h3 class="box-title">Users List</h3>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-default back_to_history"> <span class="fa fa-arrow-left"> Go Back</a>
+                            <a href="" class="btn btn-default refreshlist"> <span class="fa fa-refresh"></a>
+                            <a href="" class="btn btn-info adduser"> <span class="fa fa-plus"> Add New </a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table id="example" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="" >Sr. No.</th> 
+                                        <th class="" >Full Name</th>
+                                        <th class="" >Email</th>
+                                        <th class="" >Mobile Number</th>
+                                        <th>Action</th> 
+                                    </tr>
+                                </thead>
+            
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+<div class="modal fade" id="userModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> Add/Edit User </h4>
+            </div>
+            <form user="form" id="userFrm" name="userFrm">
+                <div class="modal-body">
+                    
+                    <div class="form-group">
+                        <label for="first_name">First Name </label>
+                        <input name="first_name" id="first_name" type="text" placeholder="First Name"  class="form-control"/>
+                    </div>
+					
+					<div class="form-group">
+                        <label for="last_name">Last Name </label>
+                        <input name="last_name" id="last_name" type="text" placeholder="Last Name"  class="form-control"/>
+                    </div>
+					
+                    <div class="form-group">
+                        <label for="email"> Email </label>
+                        <input name="email" id="email" type="text" placeholder="Email"  class="form-control"/>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="mobile_number"> Mobile Number </label>
+                        <input name="mobile_number" id="mobile_number" type="text" placeholder="Mobile Number"  class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"> Password </label>
+                        <input name="password" id="password" type="password" placeholder="Choose a password"  class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="conf_password" > Confirm Password </label>
+                        <input name="conf_password" id="conf_password" type="password" placeholder="Confirm password"  class="form-control"/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-success submtBtn" id="submtBtn" value="Submit"> 
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="../../admin/custom/user/list.js"></script>
+
+<%- include ../layouts/adminfooter.ejs %>

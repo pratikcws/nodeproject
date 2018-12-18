@@ -1,0 +1,114 @@
+<%- include ../layouts/adminheader.ejs %>
+<%- include ../layouts/adminsidebar.ejs %>
+<div class="content-wrapper">
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box box-info">
+          <div class="height20"></div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="">
+          <div class="">
+
+
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                  <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Total Users</span>
+                    <span class="info-box-number">
+                      <%= total_user %></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                  <span class="info-box-icon bg-red"><i class="fa fa-money"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Transaction</span>
+                    <span class="info-box-number">INR
+                      <%= total_amount %></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+
+              <!-- fix for small devices only -->
+              <div class="clearfix visible-sm-block"></div>
+
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                  <span class="info-box-icon bg-green"><i class="fa fa-list"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Total Posts</span>
+                    <span class="info-box-number">
+                      <%= total_post %></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                  <span class="info-box-icon bg-yellow"><i class="fa fa-tags"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Total Categories</span>
+                    <span class="info-box-number">
+                      <%= total_categories %></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                
+                <form name="serviceextrafee" id="serviceextrafee" style="PADDING: 20px;">
+                  <div class="form-group">
+                    <label for="posterfee">Poster Fee (In %)</label>
+                    <input type="text" name="posterfee" class="form-control" id="posterfee" value="<%if(Service){%><%=Service.posterfee%><%} %>">
+                  </div>
+                  <div class="form-group">
+                    <label for="taskerfee">Tasker Fee (In %)</label>
+                    <input type="text" name="taskerfee" class="form-control" id="taskerfee" value="<%if(Service){%><%=Service.taskerfee%><%}%>">
+                  </div>
+                  
+
+                  <input type="hidden" name="id" value="<%if(Service){%><%=Service._id %><% }%>">
+
+                  <button type="submit" class="btn btn-default">Submit</button>
+
+                </form>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="../../admin/custom/dashboard/index.js"></script>
+<%- include ../layouts/adminfooter.ejs %>

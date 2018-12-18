@@ -1,0 +1,115 @@
+<%- include ../layouts/adminheader.ejs %>
+<%- include ../layouts/adminsidebar.ejs %>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <div class="pull-left">
+                            <h3 class="box-title">Pages List</h3>
+                        </div>
+                        <div class="pull-right">
+                         <a href="#" class="btn btn-default back_to_history"> <span class="fa fa-arrow-left"> Go Back</a>
+                            <a href="" class="btn btn-default refreshlist"> <span class="fa fa-refresh"></a>
+                             <a href="" class="btn btn-info addPage"> <span class="fa fa-plus"> Add New </a> 
+                        </div>
+                    </div>
+                    <div class="box-body">
+                   <table id="pageTable" class="display" cellspacing="0" width="100%">
+        <thead>
+           <tr>
+                <th class="" >Sr. No.</th> 
+                <th class="" > Title  </th>
+                <th class="" > Slug  </th>
+                <th class="" > Description </th>
+                 <th>Action</th> 
+            </tr>
+        </thead>
+        
+    </table>
+    </div>
+
+</div>
+</div>
+</div>
+
+</section>
+</div>
+
+
+<div class="modal fade" id="pageModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> Add/Edit Page </h4>
+            </div>
+            <form role="form" id="pageFrm" name="pageFrm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title"> Title </label>
+                        <input type="text" class="form-control" id="title"  name="title" placeholder="Enter page title..">
+                    </div>
+                    <div class="form-group">
+                        <label for="slug"> Slug </label>
+                        <input type="text" class="form-control" id="slug"  name="slug" placeholder="Enter page slug..">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description"> Description </label>
+                        <textarea id="editor"  name="description" placeholder="Enter page description" class="form-control" rows="10" ></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-success submtBtn" id="submtBtn" value="Submit"> 
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="pageDesc" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> Add/Edit Page </h4>
+            </div>
+           <div class="modal-body">
+		   <div class="page_desc_con">
+		   </div>
+		   </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script src="<%= site_url('front/custom/js/ckeditor.js') %>"></script>
+<script src="<%= site_url('front/custom/js/sample.js') %>"></script>
+
+<script src="../../admin/custom/page/list.js"></script>
+<script>
+	initSample();
+	$(function(){
+	
+	
+	$('body').on('click', '.page-desc-btn', function(e){
+		e.preventDefault();
+		var pagedesc = $(this).data('desc');
+		alert(pagedesc);
+		$('.page_desc_con').html("tttttttttttt");
+		$('#pageDesc').modal('show');
+	});
+	})
+</script>
+<%- include ../layouts/adminfooter.ejs %>

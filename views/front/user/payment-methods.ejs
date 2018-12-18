@@ -1,0 +1,188 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+        <section id="page-dashbord">
+            <div class="container">
+	            <div class="row">
+				<%- include ../user/sidebar.ejs %>
+				<div class="col-md-9 col-sm-9 col-xs-12 right-inner" id="refreshdiv">
+				<div class="pageinner">
+						<h5>Payment methods </h5>
+					</div>
+
+					<ul class="nav nav-tabs common-tabs" role="tablist">
+					    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Make Payments</a></li>
+					    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Receive Payments</a></li>			   
+					  </ul>
+
+					  <!-- Tab panes -->
+					<div class="tab-content">
+					    <div role="tabpanel" class="tab-pane active" id="home">
+					    	<p>When you are ready to accept a Tasker's offer, you will be required to pay for the task using Airtasker Pay. Payment will be held securely until the task is complete and you release payment to the Tasker.</p>
+
+					    	<div class="">
+					    		<h6>Credit Card</h6>
+					    		<a href="#" data-toggle="modal" data-target="#cardmodal"> <i class="fa fa-plus-circle"></i> Add your credit card</a>
+					    	</div>
+							
+						 </div>
+					    <div role="tabpanel" class="tab-pane" id="profile">
+					    	<p>Once a task is completed, you will be able to request payment from the Job Poster, who will then release it to your nominated account.</p>
+					    	<h6>Billing address</h6>
+							<p>Your billing address will be verified before you can receive payments.</p>
+							
+							<form action="#" name="billing_Address" id="billing_Address">
+							
+							<div class="form-group">
+								<label>Address Line 1 </label>
+								<input type="text" class="form-control" name="address1" value="<% if(billingdata){ %><%= billingdata.address1 !=='undefined' ? billingdata.address1 : '' %><% } %>">
+							</div>
+
+							<div class="form-group">
+								<label>Address Line 2(optional) </label>
+								<input type="text" class="form-control" name="address2" value="<% if(billingdata){ %><%= billingdata.address2 !=='undefined' ? billingdata.address2 : '' %><% } %>">
+							</div>
+
+							<div class="form-group">
+								<label>City </label>
+								<input type="text" class="form-control" name="city" value="<% if(billingdata){ %><%= billingdata.city !=='undefined' ? billingdata.city : '' %><% } %>">
+							</div>
+
+							<div class="form-group">
+								<label>State  </label>
+								<input type="text" class="form-control" name="state" value="<% if(billingdata){ %><%= billingdata.state !=='undefined' ? billingdata.state : '' %><% } %>">
+							</div>
+
+							<div class="form-group">
+								<label>Postcode   </label>
+								<input type="text" class="form-control" name="postcode" value="<% if(billingdata){ %><%= billingdata.postcode !=='undefined' ? billingdata.postcode : '' %><% } %>">
+							</div>
+
+							<div class="form-group">
+								<label>Country    </label>
+								<input type="text" class="form-control" name="country" value="<% if(billingdata){ %><%= billingdata.country !=='undefined' ? billingdata.country : '' %><% } %>">
+							</div>
+							
+							<div class="form-group">
+								<button type="submit" class="btn btn--primary">
+									Add billing adress
+								</button>
+								<p>For account verification purposes, your address will never be shown publicly.</p>
+							</div>
+							
+							
+							</form>
+							
+							<h6>Bank account details</h6>
+							<p>Please provide your bank details so you can get paid. We don't take any money from your account.</p>
+							
+							<form action="#" name="bank_Account_detials" id="bank_Account_detials" >
+							
+							<div class="form-group">
+								<label>Account Holder Name    </label>
+								<input type="text" class="form-control" name="acc_holder_name" value="<% if(account_details){ %><%= account_details.acc_holder_name !=='undefined' ? account_details.acc_holder_name : '' %><% } %>">
+							</div>
+
+							<div class="form-group">
+								<label>BSB    </label>
+								<input type="text" class="form-control" name="bsb" value="<% if(account_details){ %><%= account_details.bsb !=='undefined' ? account_details.bsb : '' %><% } %>">
+							</div>
+
+							<div class="form-group">
+								<label>Account Number    </label>
+								<input type="text" class="form-control" name="acc_number" value="<% if(account_details){ %><%= account_details.acc_number !=='undefined' ? account_details.acc_number : '' %><% } %>">
+							</div>
+
+							<div class="form-group">
+								<button type="submit" class="btn btn--primary">Add Bank Account</button>
+							</div>
+							
+							</form>
+
+
+					    </div>	
+					</div>
+				</div>       
+	            </div>
+            </div>
+        </section>
+		
+		
+		
+<!-- Modal -->
+	<div class="modal fade" id="cardmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Add your credit card</h4>
+			</div>
+			<div class="modal-body">
+				<form action="#" id="addpaymentmethod" name="addpaymentmethod">
+					<div class="form-group">
+					
+						<label for="card_number">Card Number</label>
+						<input type="text" class="form-control" name="card_number" id="card_number" placeholder="1234 1234 1234 1234" data-inputmask="'mask': '9999 9999 9999 9999'" value="<% if(data){ %><%= data.card_number !=='undefined' ? data.card_number : '' %><% } %>">
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="exp_date">Expiry Date</label>
+									<input type="text" class="form-control masked" id="exp_date" name="exp_date" placeholder="MM / YY" value="<% if(data){ %><%= data.exp_date !=='undefined' ? data.exp_date : '' %><% } %>" >
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="cvc" >CVC</label>
+										<input type="text" class="form-control" id="cvc" name="cvc"  placeholder="CVC" value="<% if(data){ %><%= data.cvc !=='undefined' ? data.cvc : '' %><% } %>">
+										</div>
+									</div>
+								</div>
+								<p>By providing your credit card details, you agree to Stripe’s 
+									<a href="#">Terms & Conditions</a>
+								</p>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">Add</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>	
+<script>
+<% if(data){ %>
+var payment_id="<%= data._id !=='undefined' ? data._id : '' %>";
+ <% } else{ %>  
+   var payment_id="";
+<% } %>
+
+
+<% if(billingdata){ %>
+var billing_id ="<%= billingdata._id !=='undefined' ? billingdata._id : '' %>";
+ <% } else{ %>  
+   var billing_id="";
+<% } %>
+
+
+<% if(account_details){ %>
+var account_id ="<%= account_details._id !=='undefined' ? account_details._id : '' %>";
+ <% } else{ %>  
+   var account_id="";
+<% } %>
+
+
+
+
+
+
+
+</script>
+<script src="<%= site_url('front/custom/js/index/index.js') %>"></script>
+
+<%- include ../layouts/footerscripts.ejs %>
+
+<script src="https://jondavidjohn.github.io/payform/javascripts/payform.min.js"></script>
+
+<script type="text/javascript" src="<%- site_url('front/custom/js/userdashboard/payment.js') %>"></script>

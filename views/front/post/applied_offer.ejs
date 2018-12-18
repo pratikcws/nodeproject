@@ -1,0 +1,60 @@
+<%- include ../layouts/header.ejs %>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<%- include ../functions.ejs %>
+
+
+  <section id="page-dashbord">
+    <div class="container">
+      <div class="row">
+        <%- include ../user/sidebar.ejs %>
+          <div class="col-md-9 col-sm-9 col-xs-12 right-inner">   
+            <div class="pageinner">
+              <h5>Applied Projects</h5>
+            </div>
+							
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">Project Name</th>
+				      <th scope="col">created Date</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+					<% if(applied!= "undefined"){ %>
+				   <% i=0; %>
+				  <% applied.forEach(function(value) { %>
+				 
+							<tr>
+				      <th scope="row"><%= i= i+1 %></th>
+				      <td><%= value.project_id.title %></td>
+				      <td><%= convertdate(value.project_id.created_at) %></td>
+				      <td><a href="<%- site_url('post/details/') %><%= value.project_id._id %> ">Go To Task</a></td>
+				    </tr>
+                     <% }); %>  
+					  <% } %>  
+				  		
+				  </tbody>
+				</table>
+				</div>
+
+			  </div>
+		  </div>
+		</section>
+
+
+
+<%- include ../layouts/footerscripts.ejs %>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+</script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/update_profile.js') %>"></script>
+

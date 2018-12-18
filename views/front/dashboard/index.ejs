@@ -1,0 +1,204 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+<section id="page-dashbord">
+    <div class="container">
+        <div class="row">
+            <%- include ../user/sidebar.ejs %>
+            <div class="col-md-9 col-sm-9 col-xs-12 right-inner">
+                <div class="pageinner">
+                    <h5>Dashbord</h5>
+                </div>
+                <div class="reffrel">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-3">
+                            <img src="<%- site_url('front/assets/images/offer.png') %>">
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <h6>Get free Expertie Credit</h6>
+                            Invite a friend to try Expertie
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <a href="<%- site_url('account/referfriend') %>" class="btn btn--primary btn--rounded">Refer
+                                a friend</a>
+                        </div>
+                    </div>
+                    <div class="terms">*Terms and conditions apply. Find out more
+                        <a href="#"> here</a></div>
+                </div>
+
+                <div class="task-slider">
+                    <h5>What do you need done today
+                        <%= req.session.Auth.first_name+" " + req.session.Auth.last_name %>?</h5>
+                    <div id="tasker" class="carousel carousel-dots carousel-white" data-slide="4" data-slide-rs="2"
+                        data-autoplay="true" data-nav="true" data-dots="true" data-space="20" data-loop="true"
+                        data-speed="800">
+
+
+
+                        <% catdata.forEach(function(value) { %>
+                        <div class="item">
+                            <a href="#">
+                                <%if (value.image) { %>
+                                <img src="<%- site_url('uploads/category/') %><%= value.image%>" class="img-responsive">
+                                <% } else{ %>
+                                <img src="<%- site_url('uploads/category/placeholder.png') %>" class="img-responsive">
+                                <% } %>
+                                <div class="item-hover">
+                                    <div class="view-more"><a href="<%- site_url('account/addtask/') %><%= value._id%>">Post
+                                            a task</a></div>
+                                </div>
+                                <span class="taskservice">
+                                    <%= value.title%></span>
+                            </a>
+                        </div>
+                        <% }); %>
+                    </div>
+
+                </div>
+
+                <!-- <div class="announcements">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><h6>Expertie Announcements</h6></li>
+
+                                    <li class="list-group-item"><span class="label label-primary">New</span> New feature: <a href="#">Increase the task price</a></li>
+                                    <li class="list-group-item"><i class="fa fa-volume-up"></i> Just launched: Gasfitting & Plumbing Badges - <a href="#"> Add it to your profile </a></li>
+                                    <li class="list-group-item"><i class="fa fa-volume-up"></i> Just launched: Electrical Badge - <a href="#"> Add it to your profile </a></li>
+                                    <li class="list-group-item"><i class="fa fa-volume-up"></i> Just launched: Working with Children Badge - <a href="#"> Add it to your profile </a></li>
+                                </ul>
+                            </div>
+                            -->
+                <div class="tasksummery">
+                    <h5>My Tasks Summary</h5>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel panel-default activity">
+                                <div class="panel-heading">
+                                    Recent Messages
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-unstyled">
+                                        <%if (message.length>=0) { %>
+                                            
+                                        <% message.forEach(function(msg) { %>
+                                           
+                                        <li>
+                                            <div class="text"> <a href="#">
+
+                                                    <% if (msg.from_user_id.user_image) { %>
+                                                    <img class="media-object" src="<%= site_url('uploads/user/profile/') %><%-msg.from_user_id.user_image %>"
+                                                        alt="avatar" style="width: 18px; height: 18px;">
+                                                    <% } else { %>
+                                                    <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>"
+                                                        style="width: 18px; height: 18px;">
+                                                    <% } %>
+
+
+                                                    <%= msg.from_user_id.first_name +"" +msg.from_user_id.last_name %>
+                                                    says</a>
+                                                <%= msg.message %> on <a href="<%- site_url('account/message/') %><%= msg.msg_head_id %>">
+                                                    <%= msg.project_id.title %></a></div>
+                                            <div class="time-super-small"><%= convertdate(msg.created_at) %> </div>
+                                        </li>
+
+                                        <% }); %>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="panel panel-default activity">
+                                <div class="panel-heading">
+                                    Notifications
+                                </div>
+
+                                <div class="panel-body">
+                                    <ul class="list-unstyled">
+                                        <%if (notifdata.length > 0) { %>
+                                        <% notifdata.forEach(function(value) { %>
+                                        <% if(value.creator_id){ %>
+                                        
+
+                                        <li>
+                                            <div class="text">
+                                                <div class="post-icon">
+
+                                                    <% if (value.creator_id.user_image) { %>
+                                                    <img class="media-object" src="<%= site_url('uploads/user/profile/') %><%-value.creator_id.user_image %>"
+                                                        alt="avatar" width="40px" height="40px">
+                                                    <% } else { %>
+                                                    <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>">
+                                                    <% } %>
+
+                                                </div>
+
+                                                <a class="user-name" href="<%= site_url('profile/') %><%-value.creator_id.first_name %><%-value.creator_id.last_name %>/<%-value.creator_id._id %>">
+                                                    <%-value.creator_id.first_name %>
+                                                    <%-value.creator_id.last_name %></a>
+
+                                                <% if(value){ %>
+                                                <% if (value.status==0) { %>
+                                                <p>create a offer On <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                                                        <%-value.project_id.title%></a> </p>
+                                                <% } else if (value.status== 1) { %>
+                                                <p>Award you a project <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                                                        <%-value.project_id.title%></a></p>
+                                                <% } else if (value.status== 2) { %>
+                                                <p>Accept Offer <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                                                        <%-value.project_id.title%></a></p>
+                                                <% } else if (value.status== 3) { %>
+                                                <p>Reject Offer <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                                                        <%-value.project_id.title%></a></p>
+                                                <% } else if (value.status== 5) { %>
+                                                <p>Created a Payment Request <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                                                        <%-value.project_id.title%></a></p>
+                                                <% } else if (value.status== 6) { %>
+                                                <p>you got review for <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                                                        <%-value.project_id.title%></a></p>
+                                                <% } %>
+                                                <% } %>
+
+                                            </div>
+
+                                            <!---<div class="time super-small">
+                                                                
+                                                                  <small><%- convertdate(value.created_at) %></small>
+                                                                </div>-->
+                                        </li>
+
+
+
+
+
+
+                                        <% } %>
+                                        <% }); %>
+                                        <% } else { %>
+                                        <li>
+                                            <div class="text">
+                                                <p>No Record Found
+                                            </div>
+
+                                        </li>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script src="<%= site_url('front/custom/js/index/index.js') %>"></script>
+
+<%- include ../layouts/footerscripts.ejs %>

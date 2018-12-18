@@ -1,0 +1,61 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+<section id="page-dashbord">
+  <div class="container">
+    <div class="row">
+      <%- include ../user/sidebar.ejs %>
+      <div class="col-md-9 col-sm-9 col-xs-12 right-inner">
+        <form name="mobileverification" id="mobileverification">
+          <h2>Mobile </h2>
+          <p>Let's stay in touch. Enter your mobile number below so you can receive SMS updates about your tasks.</p>
+            <div class="row">
+            <div class="col-md-6">
+              <% if(req.session.Auth.mobile_verify == 1){ %>
+                <div class="form-group">
+                <label class="label label-default" ><%= req.session.Auth.mobile %> (verified)</label>
+                </div>
+              <% }else{ %>
+                <div class="form-group">
+                  <label> Moblie Number <br> <small>We will send you a verification code</small></label>
+                 <input type="text" class="form-control" name="mobile" placeholder="Mobile Number">
+                </div>
+              <button type="submit" class="btn btn--primary">Send</button>
+            
+              <% } %>
+            </div>
+          </div>             
+          <p>This will allow you to make or receive calls through Expertie when you have a task in progress.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="otp" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title">OTP</h4>
+      </div>
+      <form name="otpform" id="otpform">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="otp">OTP:</label>
+            <input type="text" class="form-control" id="otp" name="otp">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script src="<%= site_url('front/custom/js/user/mobileverification.js') %>"></script>
+
+<%- include ../layouts/footerscripts.ejs %>

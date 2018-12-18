@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from brandio.io/envato/iofrm/html/login8.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Aug 2018 08:03:43 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iofrm</title>
+    <link rel="stylesheet" type="text/css" href="<%= site_url('front/custom/assests/css/bootstrap.min.css')%>">
+    <link rel="stylesheet" type="text/css" href="<%= site_url('front/custom/assests/css/fontawesome-all.min.css')%>">
+    <link rel="stylesheet" type="text/css" href="<%= site_url('front/custom/assests/css/iofrm-style.css')%>">
+    <link rel="stylesheet" type="text/css" href="<%= site_url('front/custom/assests/css/iofrm-theme8.css')%>">
+	<script>
+        var protocol = location.protocol;
+        var slashes = protocol.concat("//");
+        var host = slashes.concat(window.location.hostname);
+        var HTTP_PATH = host+':'+window.location.port+'/';
+    </script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="form-body" class="container-fluid">
+        <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                    <img class="logo-size" src="<%= site_url('front/custom/assests/images/logo-light.svg')%>" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <h3>Get more things done with Loggin platform.</h3>
+                    <p>Access to the most powerfull tool in the entire design and web industry.</p>
+                    <img src="<%= site_url('front/custom/assests/images/graphic4.svg')%>" alt="">
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <div class="website-logo-inside">
+                            <a href="index.html">
+                                <div class="logo">
+                                    <img class="logo-size" src="<%= site_url('front/custom/assests/images/logo-light.svg')%>" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="page-links">
+                            <a href="<%= site_url('login') %>" title="" class="active">Login</a><a href="<%= site_url('signup') %>" title=""> Register</a>
+                        </div>
+                        <form action="#" method="get" name="loginSubmitFrm" id="loginSubmitFrm" >
+                            <input class="form-control" type="text" name="email" placeholder="E-mail Address" required>
+                            <input class="form-control" type="password" name="password" placeholder="Password" required>
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">Login</button>
+                            </div>
+                        </form>
+                        <div class="other-links">
+                            <span>Or login with</span><a href="#">Facebook</a><a href="#">Google</a><a href="#">Linkedin</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="<%= site_url('front/custom/assests/js/jquery.min.js')%>"></script>
+<script type="text/javascript" src="<%= site_url('front/custom/assests/js/popper.min.js')%>"></script>
+<script type="text/javascript" src="<%= site_url('front/custom/assests/js/bootstrap.min.js')%>"></script>
+<script type="text/javascript" src="<%= site_url('front/custom/assests/js/main.js')%>"></script>
+<script type="text/javascript" src="<%= site_url('front/custom/js/auth/login.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+</body>
+
+<!-- Mirrored from brandio.io/envato/iofrm/html/login8.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Aug 2018 08:03:43 GMT -->
+</html>

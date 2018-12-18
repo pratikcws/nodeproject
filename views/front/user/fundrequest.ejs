@@ -1,0 +1,187 @@
+<%- include ../layouts/header.ejs %>
+<style>
+	table  tr th {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #282828;
+    line-height: 30px !important;
+    border-bottom-width: 0 !important;
+    border-color: #eee;
+    padding: 0;
+}
+</style>
+<%- include ../functions.ejs %>
+<section class="badges-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="well well-lg">
+
+					<h2 class="text-center">Release Amount</h2>
+
+					<p>On Expertie trust is extremely important to a Job Poster when they’re considering people to complete their
+						task. The Police Check Badge not only adds another verification on your profile, but also helps you to stand out
+						when making offers on tasks.</p>
+					<p>Register your interest below to get started!</p>
+					<p>We’ll send you an email with an invite to apply for a Police Check Badge and to explain what to do next.</p>
+
+					<div class="badge-application">
+						
+						<% if(!bankaccountdetails){ %>
+							<h5>Please add your bank details for release payment</h5>
+						<a href="<%- site_url('account/payment-methods') %>" >Verify account details</a>
+						<% } else { %>
+							<h5>Please verify below details: </h5>
+
+						<h5>Bank Account Details: </h5>
+						<table class="table table-bordered">
+							<tr>
+								<th>ACCOUNT Number:</th>
+								<td>
+									<%= bankaccountdetails.acc_number %>
+								</td>
+							</tr>
+							<tr>
+								<th>BSB:</th>
+								<td>
+									<%= bankaccountdetails.bsb %>
+								</td>
+							</tr>
+							<tr>
+								<th>ACCOUNT HOLDER NAME:</th>
+								<td>
+									<%= bankaccountdetails.acc_holder_name %>
+								</td>
+							</tr>
+						</table>
+
+
+						<h5>Billing Details: </h5>
+						<table class="table table-bordered">
+							<tr>
+								<th>ADDRESS:</th>
+								<td>
+									<%= billingaddress.address1 %>,<BR>
+									<%= billingaddress.address2 %>
+								</td>
+							</tr>
+							<tr>
+								<th>COUNTRY:</th>
+								<td>
+									<%= billingaddress.country %>
+								</td>
+							</tr>
+							<tr>
+								<th>STATE:</th>
+								<td>
+									<%= billingaddress.state %>
+								</td>
+							</tr>
+
+							<tr>
+								<th>CITY:</th>
+								<td>
+									<%= billingaddress.city %>
+								</td>
+							</tr>
+							<tr>
+								<th>POSTCODE:</th>
+								<td>
+									<%= billingaddress.postcode %>
+								</td>
+							</tr>
+
+						</table>
+
+						<% if(userdata.available_balance > 0 ){ %>
+						<div class="offer-box">
+							<h5>Available Balance</h5>
+							<h4>$<%= userdata.available_balance %></h4>
+
+
+							<form name="releasefundrequest" id="releasefundrequest">
+								<div class="row">
+									
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label for="Amount">Amount</label>
+											<input type="number" class="form-control" name="req_amount" id="req_amount">
+											<input type="hidden" name="acc_number" value="<%= bankaccountdetails.acc_number ? bankaccountdetails.acc_number : ""  %>">
+											<input type="hidden" name="bsb" value="<%= bankaccountdetails.bsb ? bankaccountdetails.bsb : ""  %>">
+											<input type="hidden" name="acc_holder_name" value="<%= bankaccountdetails.acc_holder_name ? bankaccountdetails.acc_holder_name : ""  %>">
+											<input type="hidden" name="address1" value="<%= billingaddress.address1 ? billingaddress.address1 : ""  %>">
+											<input type="hidden" name="address2" value="<%= billingaddress.address2 ? billingaddress.address2 : ""  %>">
+											<input type="hidden" name="country" value="<%= billingaddress.country ? billingaddress.country : ""  %>">
+											<input type="hidden" name="state" value="<%= billingaddress.state ? billingaddress.state : ""  %>">
+											<input type="hidden" name="city" value="<%= billingaddress.city ? billingaddress.city : ""  %>">
+											<input type="hidden" name="postcode" value="<%= billingaddress.postcode ? billingaddress.postcode : ""  %>">
+											<input type="hidden" name="availablebalance" value="<%= userdata.available_balance ? userdata.available_balance : ""  %>">
+											
+										</div>
+									</div>
+
+									
+										
+								</div>
+								
+								<div class="anchovy-form-item left note full-width">
+	
+									<p><i class="fas fa-info-circle"></i> Please make sure this information is correct.</p>
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"> I agreed termed and condition.
+									</label>
+								</div>
+								<button type="submit" id="btnsbmt" class="btn btn--primary btn--rounded">Submit</button>
+							</form>
+
+						</div>
+						<% } else { %>
+						<div class="offer-box">
+							<h5>Available Balance</h5>
+
+							<h4>$
+								<%= userdata.available_balance %>
+							</h4>
+						</div>
+						<p>Sorry No amount available in your account </p>
+						<% } %>
+
+						<% } %>
+						
+
+						
+					</div>
+					<h5>More information</h5>
+					<p>Please note that conditions apply in relation to the xyz, which are outlined in the <a class="link"
+						 target="_blank" href="#">Expertie Terms &amp; Conditions</a>.</p>
+					<p>Please read the <a class="link" target="_blank" href="#">important notes</a> regarding the application for the fund request.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	var available_balance = <%= userdata.available_balance || 0 %>;
+</script>
+
+<%- include ../layouts/footerscripts.ejs %>
+
+
+
+
+<script src="https://cdn.rawgit.com/atatanasov/gijgo/master/dist/combined/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://cdn.rawgit.com/atatanasov/gijgo/master/dist/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/fundrequest.js') %>"></script>
+
+<script>
+	$(document).ready(function () {
+		$('#dob').datepicker({
+			uiLibrary: 'bootstrap'
+		});
+	});
+</script>

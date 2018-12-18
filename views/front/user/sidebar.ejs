@@ -1,0 +1,68 @@
+<div class="col-md-3 col-sm-3 col-xs-12">
+    <div class="side-menu">
+        <div class="account-menu">
+            <a class="user-name" href="<%= site_url('profile/') %><%-req.session.Auth.first_name %><%-req.session.Auth.last_name %>/<%-req.session.Auth._id %>">
+			<div class="user-image">
+               
+                <% if (req.session.Auth.user_image) { %>
+                    <img src="<%- site_url('uploads/user/profile/') %><%= req.session.Auth.user_image %>" class="img-responsive">
+                        <% } else { %>
+                       <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>">
+                       <% } %>
+				
+            </div>
+
+			</a>
+			<a class="user-name" href="<%= site_url('profile/') %>
+            <%-req.session.Auth.first_name %>
+            <%-req.session.Auth.last_name %>/<%-req.session.Auth._id %>">
+            <div class="username"><%= req.session.Auth.first_name+ " " + req.session.Auth.last_name %></div>
+			</a>
+        </div>
+        <nav class="navbar navbar-default" role="navigation">
+          
+          
+            <!-- Main Menu -->
+            <div class="side-menu-container">
+                <ul class="nav navbar-nav">
+                    <li class="<%= (typeof active_nav != 'undefined' && active_nav == "dashboard") ? 'active' : "" %>"><a href="<%= site_url('account') %>"> Dashboard</a></li>
+                    
+                    <li class="<%= (typeof active_nav != 'undefined'  && active_nav == "mytask") ? 'active' : "" %>"><a href="<%= site_url('post/my-task') %>">My Task</a></li>
+                    
+                    <li class="<%= (typeof active_nav != 'undefined'  && active_nav == "favourites") ? 'active' : "" %>"><a href="<%= site_url('account/my-fav-post') %>">Favourites</a></li>
+                    
+                    <li class="<%= (typeof active_nav != 'undefined'  && active_nav == "notification") ? 'active' : "" %>"><a href="<%= site_url('account/my-notification') %>"> Notification</a></li>
+                    
+                    <li class="<%= (typeof active_nav != 'undefined'  && active_nav == "payment-history") ? 'active' : "" %>"><a href="<%= site_url('account/payment-history') %>"> Payment history</a></li>
+                    
+                    <li class="<%= (typeof active_nav != 'undefined'  && active_nav == "payment-methods") ? 'active' : "" %>"><a href="<%= site_url('account/payment-methods') %>"> Payment Methods</a></li>
+
+                    <li class="<%= (typeof active_nav != 'undefined'  && active_nav == "refer-a-friend") ? 'active' : "" %>"><a href="<%= site_url('account/referfriend') %>"> Refer a friend</a></li>
+					 
+                    <li class="<%= (typeof active_nav != 'undefined'  && active_nav == "applied_porject") ? 'active' : "" %>"><a href="<%= site_url('account/appliedoffer') %>"> Applied Projects</a></li>
+
+                    <li class="<%= (typeof active_nav != 'undefined'  && active_nav == "dashboard") ? 'active' : "" %>" class="panel panel-default" id="dropdown">
+                        <a data-toggle="collapse" href="#dropdown-lvl1">
+                            Settings <span class="caret"></span>
+                        </a>
+                        <!-- Dropdown level 1 -->
+                        <div id="dropdown-lvl1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="<%= site_url('account/profile') %>"  >Account</a></li>
+                                    <li><a href="<%= site_url('account/skill') %>">Skills</a></li>
+                                    <li><a href="<%= site_url('account/badge') %>">Badges</a></li>
+                                    <!-- <li><a href="<%= site_url('account/taskalertkeyword') %>">Task Alert Keywords</a></li>
+                                    <li><a href="<%= site_url('account/notif-settings') %>">Notification Settings</a></li> -->
+                                    <li><a href="<%= site_url('account/mobile-settings') %>">Mobile</a></li>
+                                    <li><a href="<%= site_url('account/my-portfolio') %>">Portfolio</a></li>
+                                    <li><a href="<%= site_url('account/change-password') %>">Password</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</div>

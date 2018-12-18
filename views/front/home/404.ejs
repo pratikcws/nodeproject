@@ -1,0 +1,28 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+<section class="page-404 text-center">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                <h3>404</h3>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                <div class="divider--shape-4 mb-30"></div>
+                <div class="clearfix"></div>
+                <p class="mb-30 ">OOPS! The Page You Are Looking Can't Be Found</p>
+                <a class="btn btn--bordered btn--primary" href="<%= site_url() %>">Homepage</a>
+            </div>
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .cotainer end -->
+</section>
+
+
+<%- include ../layouts/footer.ejs %>
+<script src="<%= site_url('front/custom/js/index/contactus.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/update_profile.js') %>"></script>
+

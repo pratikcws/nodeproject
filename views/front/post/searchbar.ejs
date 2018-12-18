@@ -1,0 +1,39 @@
+<form action="<%= search_url %>" method="get" name="gblSearch" id="gblSearch">
+    <section class="task-banner">
+      <div class="container">
+        <div class="col-md-2">
+          <label>50km & remotely</label>
+          <select class="form-control srchGbl" name="person_type" id="person_type">
+            <option value="" <%=(searchJson.person_type=='' ) ? "selected" : "" %> >All</option>
+
+            <option value="1" <%=(searchJson.person_type==1) ? "selected" : "" %> >in person</option>
+            <option value="2" <%=(searchJson.person_type==2) ? "selected" : "" %> >Remotely</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label>City</label>
+          <input type="text" class="form-control" name="location" placeholder="Enter a Suburb" onFocus="initializeAutocomplete()"
+            id="locality" value="<%= searchJson.location_data.locaiton %>">
+
+          <input type="hidden" name="city" id="city" placeholder="City" value="">
+          <input type="hidden" name="lat" id="latitude" placeholder="Latitude" value="<%= searchJson.location_data.latitude || '' %>">
+          <input type="hidden" name="lng" id="longitude" placeholder="Longitude" value="<%= searchJson.location_data.longitude || '' %>">
+          <input type="hidden" name="place_id" id="location_id" placeholder="Location Ids" value="">
+        </div>
+        <div class="col-md-2">
+          <label>Distance</label>
+          <input type="range" name="distance" class="srchGbl" value="<%= searchJson.distance || 50 %>">
+        </div>
+        <!-- <div class="col-md-2">
+    <label>Any Price</label>
+     <b>€ 10</b> <input id="ex2" name="" type="text" class="span2 srchGbl" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
+  </div> -->
+        <div class="col-md-3">
+          <label>Task type</label> <br>
+          <input type="checkbox" name="tasktype" class="srchGbl" <%=(searchJson.tasktype) ? "checked" : "" %> > Hide
+          already assigned tasks
+        </div>
+      </div>
+      <!-- .container end -->
+    </section>
+  </form>

@@ -1,0 +1,130 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+<section id="page-dashbord">
+	<div class="container">
+		<div class="row">
+			<%- include ../user/sidebar.ejs %>
+			<div class="col-md-9 col-sm-9 col-xs-12 right-inner">
+				<div class="pageinner">
+					<div class="col-md-12">
+						<div class="col-md-9">
+							<h5>Payment methods</h5>
+						</div>
+						<div class="col-md-3">
+							Available Balance :
+							<%= availableamount.available_balance%><br>
+							<a class="btn btn--primary btn--rounded"href="<%- site_url('user/fundrequest/') %>">Release fund</a>
+						</div>
+					</div>
+
+
+				</div>
+
+				<ul class="nav nav-tabs common-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#earned" aria-controls="earned" role="tab" data-toggle="tab">Earned</a></li>
+					<li role="presentation"><a href="#outgoing" aria-controls="outgoing" role="tab" data-toggle="tab">Outgoing</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="earned">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+
+									<th scope="col">Amount</th>
+									<th scope="col">created Date</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<% credit.forEach(function(cred) { %>
+
+								<tr>
+									<th scope="row">1</th>
+
+									<td>
+										<%=cred.amount %>
+									</td>
+									<td>--</td>
+									<td><a href="<%- site_url('post/details/') %><%=cred.post_id %> ">Go To Project</a></td>
+								</tr>
+								<% }) %>
+
+
+
+							</tbody>
+						</table>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="outgoing">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Amount</th>
+									<th scope="col">created Date</th>
+									<th scope="col">Status</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% debit.forEach(function(debt) { %>
+
+								<tr>
+									<th scope="row">1</th>
+
+									<td>
+										<%=debt.amount %>
+									</td>
+									<td><%=debt.created_at %></td>
+									<%if(debt.comment==1){%>
+										<td>payment release request processing</td>
+									<% } else if(debt.comment==2){ %>
+									<td>complete</td>
+									<% } else {%>
+										<td>--</td>
+									<%} %>
+										
+										<%if(debt.post_id){ %>
+											<td><a href="<%- site_url('post/details/') %><%=debt.post_id %> ">Go To Project</a></td>
+										<% } else { %>
+											<td>--</td>
+											<% } %>
+										
+									
+								</tr>
+								<% }) %>
+
+
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</section>
+
+
+
+<!-- Modal -->
+
+<script>
+
+
+
+
+
+
+
+</script>
+<script src="<%= site_url('front/custom/js/index/index.js') %>"></script>
+
+<%- include ../layouts/footerscripts.ejs %>
+
+<script src="https://jondavidjohn.github.io/payform/javascripts/payform.min.js"></script>
+
+<script type="text/javascript" src="<%- site_url('front/custom/js/userdashboard/payment.js') %>"></script>

@@ -1,0 +1,61 @@
+<%- include ../layouts/header.ejs %>
+
+<section class="flat-row flat-login style2 parallax1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2">
+                    </div><!-- /.col-lg-2 -->
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="login-form style2">
+                            <h3>Register</h3>
+                            <form action="#" method="get" name="SignupSubmitFrm" id="SignupSubmitFrm" accept-charset="utf-8">
+                                <div class="wrap-login firstname">
+                                    <label for="first_name">First name</label>
+                                    <input type="text" class="first-name" name="first_name" id="first_name">
+                                </div>
+                                <div class="wrap-login lastname">
+                                    <label for="last_name">Last name</label>
+                                    <input type="text" class="last-name" name="last_name" id="last_name">
+                                </div>
+                                <div class="wrap-login">
+                                    <label for="email">Email address *</label>
+                                    <input type="text" class="username" id="email" name="email">
+                                </div>
+
+                                <div class="wrap-login">
+                                    <label for="mobile_number">Mobile Number *</label>
+                                    <input type="text" class="username" id="mobile_number" name="mobile_number">
+                                </div>
+
+                                <div class="wrap-login">
+                                    <label for="password">Password *</label>
+                                    <input type="password" class="password" name="password" id="password">
+                                </div>
+
+                                 <div class="wrap-login">
+                                    <label for="conf_password">Confirm Password *</label>
+                                    <input type="password" class="password" name="conf_password" id="conf_password">
+                                </div>
+                                <div class="btn-more">
+                                    <button type="submit" >Register</a>
+                                </div>
+                            </form><!-- /form -->
+                        </div><!-- /.login-form style2 -->
+                    </div><!-- /.col-lg-4 col-sm-6 -->
+                    <div class="col-lg-5 col-sm-6">
+                        <div class="login-social">
+                            <div>For faster login or register use your social account.</div>
+                            <a href="#" class="facebook" title=""><span class="ti-facebook"></span>Login with Facebook</a>
+                            <p>or</p>
+                            <a href="#" class="twitter" title=""><span class="ti-twitter-alt"></span>Login with Twitter</a>
+                        </div><!-- /.login-social -->
+                    </div><!-- /.col-lg-5 col-sm-6 -->
+                    <div class="col-lg-1">
+                    </div><!-- /.col-lg-1 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+            <div class="overlay"></div>
+        </section><!-- /.flat-login style2 -->
+<%- include ../layouts/footer.ejs %>
+<script src="../../front/custom/js/app.js"></script>
+<script src="../../front/custom/js/auth/signup.js"></script>

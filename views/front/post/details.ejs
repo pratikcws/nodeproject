@@ -1,0 +1,671 @@
+<div class="row">
+
+	<div id="wrapper" class="wrapper clearfix">
+	
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSlhXQ8ixpBW6CLmCJWOIvQXmwzXwlbj4&v=3.exp&sensor=false&libraries=places"></script>
+		
+		<%- include ../layouts/header.ejs %>
+
+		<% include ../functions.ejs %>
+
+		<!-- Page Title #1
+============================================= -->
+		 <%- include ../post/searchbar.ejs %>
+
+		<section id="task">
+			<div class="container">
+				<div class="col-md-4">
+					<div class="task-left">
+						<ul class="list locations" style="">
+
+							<% if (posts != null) { %>
+							<% posts.forEach(function(val) { %>
+							<% if(slug=="my-task"){ %>
+							<a href="<%= site_url('post/my-task/') %><%= val._id %>" class="new-task new-task-open">
+								<% } else{ %>
+								<a href="<%= site_url('post/details/') %><%= val._id %>" class="new-task new-task-open">
+									<% } %>
+
+									<div class="new-task-header">
+										<span class="new-task-title">
+											<%= val.title %></span>
+										<div class="new-task-price">
+											<span>$
+												<%= val.budget %>
+												<% if(val.budget_type=="hourly"){ %>
+												<%= "/hr" %>
+												<% } %>
+											</span>
+										</div>
+									</div>
+									<div class="new-task-body">
+										<div class="avatar-img new-avatar">
+											<% if (val.user_id.user_image) { %>
+											<img src="<%- site_url('uploads/user/profile/') %><%= val.user_id.user_image %>" class="img-responsive"
+											 width="32" height="32">
+											<% } else { %>
+											<img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive" width="32" height="32">
+											<% } %>
+										</div>
+										<div class="new-task-online at-icon-online">
+											<span class="new-task-detail"><i class="fa fa-dot-circle-o"></i> Remote</span>
+										</div>
+										<div class="new-task-date at-icon-calendar">
+											<span class="new-task-detail">
+												<i class="fa fa-calendar"></i>
+												<%= convertdate(val.created_at) %>
+											</span>
+										</div>
+									</div>
+									
+									<div class="new-task-footer">
+											
+										<span class="new-task-status">
+											
+											<% if (val){ %>
+											<% if(val.status==1 && !val.awarded_to){ %>
+												<label></label>
+											<label class="label label-info">Open</label>
+											<% }else if(val.awarded_to){ %>
+												<label></label>
+												<label class="label label-warning">Assigned</label>
+											<% } else if(val.status==3){ %>
+												<label></label>
+											<label class="label label-success">Completed</label>
+											<% } %>
+											<% } %>
+										</span>
+									</div>
+								</a>
+
+								<li style="display:none">
+									<div class="location-name">Place 1</div>
+									<div class="location-address">
+										<%= val.title %><br>BUDGET:
+										<%= val.budget %><br><a href="<%= site_url('post/details/') %><%= val._id %>">View Task</a></div>
+									<div class="location-lat">
+										<%= val.location[0] %>
+									</div>
+									<div class="location-lng">
+										<%= val.location[1] %>
+									</div>
+								</li>
+								<% }); %>
+								<% }else { %>
+								<p style="error msg"> no post found </p>
+								<a href="<%= site_url('account/addtask/') %>" class="btn btn--primary btn--bordered">Post A Task</a>
+								<% }%>
+						</ul>
+
+						<% if(!req.session.Auth){ %>
+						<div class="task-left-footer">
+							<h5 class="text-center">To see more Task</h5>
+							<a href="#" id="signuppopup" class="btn btn--primary btn--rounded btn-sm">Join Us</a>
+							or
+							<a href="#" id="loginpopup" class="btn btn--primary btn--rounded btn-sm">Login</a>
+						</div>
+						<% } %>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-8" id="refreshdetails">
+
+					<% if(data){ %>
+					<div class="task-right">
+						<div class="row">
+							<div class="col-md-8">
+								<div class="topbar">
+									<div class="steps">
+										
+										<span class="step <%=data.status==1 ? " done" : "" %>">Open</span>
+										<%if(data.awarded_to && data.status!=3 ){%>
+										<span class="step done" >Assigned</span>
+										<% } else{ %>
+										<span class="step">Assigned</span>
+										<% } %>
+										<span class="step <%=data.status==3 ? " done" : "" %>"> Completed</span>
+									</div>
+									<% if(req.session.Auth){ %>
+
+									<% if(favdata && typeof favdata != "undefined"){ %>
+										
+									<div class="followbutton">
+										<a href="#" class="favBtn" id="<%-data._id %>"><i class="fa fa-heart"></i>
+											Added</a>
+									</div>
+									<% }else{ %>
+									<a href="#" class="favBtn" id="<%-data._id %>"><i class="fa fa-heart-o"></i>Favorites</a>
+									<% } %>
+									<% } %>
+								</div>
+
+								<h2>
+									<%-data.title %>
+								</h2>
+
+								<div class="post-detail">
+									<div class="posted-list">
+										<div class="post-icon">
+											<% if (data.user_id.user_image) { %>
+											<img src="<%- site_url('uploads/user/profile/') %><%= data.user_id.user_image %>" class="img-responsive"
+											 width="32" height="32">
+											<% } else { %>
+											<img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive">
+											<% } %>
+										</div>
+										<div class="post-details">
+											<div class="post-label">Posted by </div>
+											<a href="<%= site_url('profile/') %><%-data.user_id.first_name %><%-data.user_id.last_name %>/<%-data.user_id._id %>">
+												<%-data.user_id.first_name %>
+												<%-data.user_id.last_name %></a>
+
+											<span class="pull-right"></span>
+
+										</div>
+									</div>
+
+									<div class="posted-list">
+										<div class="post-icon">
+											<i class="fa fa-map-marker"></i>
+										</div>
+										<div class="post-details">
+											<div class="post-label">Location </div>
+											<%= data.suburb ? data.suburb : "" %>
+										</div>
+									</div>
+
+									<div class="posted-list">
+										<div class="post-icon">
+											<i class="fa fa-calendar"></i>
+										</div>
+										<div class="post-details">
+											<div class="post-label">Due date </div>
+											<% var duedate = convertdate(data.due_date);
+										var todaynow = new Date();
+										var now = convertdate(todaynow);
+									%>
+
+											<%if(duedate < now) { %>
+											<!--date passed-->
+											<% } %>
+											<%- duedate %>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-md-4 task-rightbar">
+								<div class="offer-box">
+									<h5>Task Budget</h5>
+
+									<h4>$
+										<%-data.budget %>
+										<% if(data.budget_type=="hourly"){ %>
+										<%= "/hr" %>
+										<% } %>
+									</h4>
+
+									<%if(data.status!=3) { %>
+									<% if (req.session.Auth) { %>
+										
+									<% if (data.user_id._id != req.session.Auth._id && !cuurentusroffer) { %>
+									<a href="#" class="btn btn--primary btn--rounded" id="make_an_offer">Make an Offer</a>
+									<% } else if (data.user_id._id != req.session.Auth._id && cuurentusroffer && data.awarded_to!=req.session.Auth._id) { %>
+									<a href="#" class="btn btn--primary btn--rounded" id="make_an_offer">edit Offer</a>
+									<% } else if (data.user_id._id == req.session.Auth._id ) { %>
+									<a href="#" class="btn btn--primary btn--rounded reviews">Review offers</a>
+
+									<% }  %>
+
+									<% } else{ %>
+									<a href="#" id="loginpopup" class="btn btn--primary btn--rounded">Make an Offer</a>
+									<% } %>
+									<% } %>
+
+								</div>
+
+								<!-- <div class="form-group">
+									<select class="form-control">
+										<option>More Options</option>
+										<option>Post a Similar task</option>
+										<option>Set up Alerts</option>
+									</select>
+								</div> -->
+
+								<div class="social-shares">
+
+									<h6>Share</h6>
+									<div id="shareIconsCountInside"> </div>
+								</div>
+
+								<!-- <a href="#" class="report-task"><i class="fa fa-flag-checkered"></i> Reoprt this task</a> -->
+
+							</div>
+						</div>
+
+						<div class="post-description">
+							<h6>Detail</h6>
+							<p>
+									<span class="more"><%-data.description %></span>
+							</p>
+
+						</div>
+
+						<% if(!req.session.Auth){ %>
+						<div class="task-left-footer">
+							<h5 class="text-center">To see more Task</h5>
+							<a href="#" id="signuppopup" class="btn btn--primary btn--rounded btn-sm">Join Us</a>
+							or
+							<a href="#" id="loginpopup" class="btn btn--primary btn--rounded btn-sm">Login</a>
+						</div>
+						<% } else{ %>
+						<div class="task-activity">
+							<h6>Task Activity</h6>
+							<div class="activity-header"> <span> Comment About This Task</span></div>
+							<p>Comment below for more details and remember that for your safety, not to share personal information e.g.
+								email and phone numbers.</p>
+							<form name="comment" id="comment">
+								<div class="form-group">
+									<textarea class="form-control" name="comment" id="comment" rows="2" placeholder="Ask NIck a Question" required=""
+									 aria-required="true"></textarea>
+								</div>
+								<div class="form-group">
+									<input type="file" name="comment_image">
+								</div>
+
+								<div class="form-group">
+									<button type="submit" class="btn btn--primary">Send </button>
+								</div>
+							</form>
+						</div>
+						<% } %>
+						<ul class="nav nav-tabs comment-tab">
+								<li class="active"><a id="clickedbtn" data-toggle="pill" href="#offers">Offers</a></li>
+							<li><a data-toggle="pill" href="#comments">Comments</a></li>
+							
+						</ul>
+
+						<div class="tab-content">
+							<div id="comments" class="tab-pane fade">
+								<div class="post-offers">
+
+									
+									<% if(typeof(commentdata) != "undefined") { %>
+									<% commentdata.forEach(function(value) { %>
+									<div class="media">
+										<div class="media-left">
+											<a href="#">
+												<% if (value.user_id.user_image) { %>
+												<img src="<%- site_url('uploads/user/profile/') %><%= value.user_id.user_image %>" class="img-responsive"
+												 width="32" height="32">
+												<% } else { %>
+												<img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive">
+												<% } %>
+											</a>
+										</div>
+
+										<div class="media-body">
+											<a class="user-name" href="<%= site_url('profile/') %><%-value.user_id.first_name %><%-value.user_id.last_name %>/<%-value.user_id._id %>">
+												<%-value.user_id.first_name %>
+												<%-value.user_id.last_name %></a>
+												
+												<% if(value.user_id._id.equals(data.user_id._id) ) { %>
+												
+												<span class="label label-primary">poster</span>
+												<% } %>
+
+											<div class="tasker-status">
+												<div class="rating">
+														<div class="userreviews" userrate="<%= value.user_id.rating %>" >
+												</div>
+												</div>
+												<div class="bid-compliteratio">
+													<br>
+												</div>
+											</div>
+											<br>
+											<div class="comments">
+
+												<%= value.comment%>
+												<%if(value.comment_image){%>
+												<br><a href="<%- site_url('uploads/post/comment/') %><%= value.comment_image%>" download>download attachment</a>
+												<% } %>
+												
+												
+											</div>
+											<small><%= convertdate(value.created_at) %></small>
+										</div>
+									</div>
+									<% }); %>
+									<% } else{ %>
+										<div class="alert alert-danger">
+												<strong>There is no comment</strong>.
+											</div>
+									<% } %> 
+									
+									
+								</div>
+								<% } %>
+									
+							</div>
+
+							<!---offer start here --->
+							<div id="offers" class="tab-pane fade in active">
+								<% if(typeof proposals != 'undefined' && proposals !="" ){ %>
+
+								<% proposals.forEach(function(pvalue) { %>
+
+								<div class="row">
+									<div class="col-md-9 col-sm-8">
+
+										<div classs="media">
+
+											<div class="media-left">
+												<a href="#">
+													<% if (pvalue.user_id && pvalue.user_id.user_image) { %>
+													<img src="<%- site_url('uploads/user/profile/') %><%= pvalue.user_id.user_image %>" class="img-responsive"
+													 width="32" height="32">
+													<% } else { %>
+													<img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive">
+													<% } %>
+												</a>
+											</div>
+
+											<div class="media-body">
+
+												<a class="user-name" href="<%= site_url('profile/') %><%-pvalue.user_id.first_name %><%-pvalue.user_id.last_name %>/<%-pvalue.user_id._id %>">
+													<%-pvalue.user_id.first_name %>
+													<%-pvalue.user_id.last_name %></a>
+
+
+
+												<div class="tasker-status">
+													<div class="userreviews" userrate="<%= pvalue.user_id.rating %>" >
+															
+
+													</div>
+													<div class="clearfix"></div>
+													<div class="bid-compliteratio">
+														<strong>$
+															<%= pvalue.offer_amount %></strong>
+														<div class="price">
+
+														</div>
+													</div>
+
+													<div class="comments">
+														<%= pvalue.offer_description %>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-4 offer-btns">
+										<!---poster condition-->
+										
+										
+										<% if(pvalue.user_id._id.equals(data.awarded_to) ) { %>
+											<span class="label label-primary">Assigned</span>
+										<% } %>
+										<% if(data.status==3 && !reviewrating && data.user_id._id.equals(req.session.Auth._id) && pvalue.user_id._id.equals(data.awarded_to) ){ %> 
+											
+										<a href="<%= site_url('review/rating/' + data._id) %>" class="btn btn-success btn-sm">Review &
+											Rating </a>
+										<% } %>
+										<%if(!useroffer && data.user_id._id == req.session.Auth._id && pvalue.status==0 && !data.awarded_to  ){ %>
+										<a href="#" offer_id="<%= pvalue._id %>" status="1" id="<%-data._id %>" ato="<%-pvalue.user_id._id %>" cby="<%-data.user_id._id %>"
+										 class="awarduser btn btn-primary  btn-sm btn-rounded" id="">Award</a>
+										<a href="#" projectid="<%-data._id%>" to_userid="<%-pvalue.user_id._id %>" from_userid="<%=data.user_id._id %>"
+										 class="startachat btn btn-primary btn-rounded btn-sm" id="">start a chat</a>
+										<% } else if(data.user_id._id == req.session.Auth._id && pvalue.status==1 )  { %>
+										<a href="#" projectid="<%-data._id%>" to_userid="<%-pvalue.user_id._id %>" from_userid="<%=data.user_id._id %>"
+										 class="startachat btn btn-primary btn-rounded btn-sm" id="">start a chat</a>
+										 
+										 <a href="#" offer_id="<%= pvalue._id %>" status="0" id="<%-data._id %>" ato="0" cby="<%-data.user_id._id %>"
+											class="awarduser btn btn-warning  btn-sm btn-rounded" id="">Cancel offer</a>
+
+										 
+										 <span class="label label-default">Awaitaing for acceptance</span>
+										
+										<% } else if(data.user_id._id == req.session.Auth._id && pvalue.status==2 )  { %>
+											<%if(data.status!=3) { %>
+												<br>
+											<a href="<%= site_url('post/complete/payment/'+data._id) %> " class="btn btn-info btn-rounded btn-sm">Complete
+											a project</a>
+											<% } %>
+										<a href="#" projectid="<%-data._id%>" to_userid="<%-pvalue.user_id._id %>" from_userid="<%=data.user_id._id %>"
+										 class="startachat btn btn-primary btn-rounded btn-sm" id="">start a chat</a>
+										
+										<% } else if(data.user_id._id == req.session.Auth._id && pvalue.status==3){ %>
+										
+										<span class="label label-danger">Rejected</span>
+										<a href="#" offer_id="<%= pvalue._id %>" status="1" id="<%-data._id %>" ato="<%-pvalue.user_id._id %>" cby="<%-data.user_id._id %>"
+											class="awarduser btn btn-primary  btn-sm btn-rounded" id="">Award</a>
+										<a href="#" projectid="<%-data._id%>" to_userid="<%-pvalue.user_id._id %>" from_userid="<%=data.user_id._id %>"
+										 class="startachat btn btn-primary btn-rounded btn-sm" id="">start a chat</a>
+										<% } else{ %>
+										<%if (data.user_id._id == req.session.Auth._id){%>
+										<a href="#" projectid="<%-data._id%>" to_userid="<%-pvalue.user_id._id %>" from_userid="<%=data.user_id._id %>"
+										 class="startachat btn btn-primary btn-rounded btn-sm" id="">start a chat</a>
+										<% } %>
+										<% } %>
+
+
+										<!---tasker conditions-->
+
+										<% if(pvalue.user_id._id== req.session.Auth._id  && pvalue.status==1) { %>
+										<a href="#" servicecharge="<%= pvalue.service_amount %>" offer_id="<%= pvalue._id %>" status="2" ato="<%-pvalue.user_id._id %>"
+										 id="<%-data._id %>" cby="<%=data.user_id._id %>" class="btn btn-primary btn-rounded btn-sm awarduser">Accept</a>
+
+										<a href="#" servicecharge="<%= pvalue.service_amount %>" offer_id="<%= pvalue._id %>" status="3" ato="<%-pvalue.user_id._id %>"
+										 id="<%-data._id %>" cby="<%=data.user_id._id %>" class="btn btn-danger btn-rounded btn-sm awarduser">Reject</a>
+
+										<% } else if(pvalue.user_id._id== req.session.Auth._id  && pvalue.status==2 && !paymentrequest) { %>
+											<br><a href="#" data-project="<%-data._id %>" data-user="<%-data.user_id._id %>" to_userid="<%-pvalue.user_id._id %>"
+										 class="btn btn-primary btn-rounded btn-sm paymentRequest" data-status="2">Payment Request </a>
+										<% } else if(pvalue.user_id._id== req.session.Auth._id  && pvalue.status==2 && paymentrequest) { %>
+										
+											<br><br><span class="label label-success">Payment Request Sent</span>
+										
+											<% } else if(pvalue.user_id._id== req.session.Auth._id  && pvalue.status==3) { %>
+										<span>Rejected</span>
+										<% } %>
+
+
+
+
+									</div>
+								</div>
+								<hr>
+
+
+								<% });%>
+								<% } else if(req.session.Auth){ %>
+									<div class="alert alert-danger">
+										<strong>There is no offer.</strong> 
+									</div>
+									
+									<% } else{ %>
+										<div class="alert alert-danger">
+												<strong>please login to create offer and view offer.</strong> 
+											</div>
+									<% } %>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+		</section>
+
+
+		<%- include ../layouts/footerscripts.ejs %>
+
+		
+		<!-----modal for make an offer ------>
+		<!-- Modal -->
+		<div class="modal fade" id="makeoffer_modal" tabindex="-1" role="dialog" aria-labelledby="makeoffer_modal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Make An Offer</h4>
+					</div>
+					<div class="modal-body">
+						
+						<form action="#" id="createoffer" name="createoffer">
+
+							<div class="form-group">
+								<label for="offer_amount">Offer Amount ($)</label>
+
+								<input type="number" min="0" id="offer_amount" class="form-control" name="offer_amount" placeholder="Amount" exp_per="<%= servicecharge.taskerfee %>"
+								 value="<% if( typeof cuurentusroffer!= "undefined" && cuurentusroffer && cuurentusroffer.offer_amount.length!=null && cuurentusroffer.offer_amount !='undefined'){ %>
+								<%= cuurentusroffer.offer_amount %> 
+								<% } %>">
+
+								<input type="hidden" name="service_amount" id="expertieprice" 
+								value="<% if( typeof cuurentusroffer!= "undefined" && cuurentusroffer && cuurentusroffer.service_amount != null && cuurentusroffer.service_amount !='undefined') { %><%= cuurentusroffer.service_amount  %> <% } %>">
+
+								<% if(data.user_id){ %>
+								<input type="hidden" name="postcreatedby" value="<%-data.user_id._id %>">
+								<% } %>
+							</div>
+							<div class="form-group">
+								<label for="offer_description">Why are you best person for this task.</label>
+								<textarea class="form-control" name="offer_description"><% if(typeof cuurentusroffer!= "undefined" && cuurentusroffer &&  typeof cuurentusroffer.offer_description !="undefined"){ %><%= cuurentusroffer.offer_description !='undefined' ? cuurentusroffer.offer_description : '' %><% } %></textarea>
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-6">
+									<div class="">
+										<label>you will recieve</label>
+										<input type="text" name="tasker_amount" id="taskerrecieve" class="form-control" value="<% if( typeof cuurentusroffer!= "undefined" && cuurentusroffer &&  typeof cuurentusroffer.tasker_amount !="undefined" && cuurentusroffer.tasker_amount != null){ %><%-cuurentusroffer.tasker_amount %> <% } %>" readonly>
+									</div>
+								</div>
+								<div class="col-md-6">
+
+
+									<div class="">
+										<label>Service Fee</label>
+										<span id="expertieamount"> </span>
+									</div>
+
+								</div>
+							</div>
+							<input type="hidden" name="project_id" value="<%-data._id %>">
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">Submit Offer</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			</div>
+			<!---end here -------->
+			<script src="<%= site_url('front/custom/js/post/fav_list.js') %>"></script>
+			<script src="<%= site_url('front/custom/js/post/makeanoffer.js') %>"></script>
+			<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+			<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+			<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+			<script type="text/javascript" src="<%- site_url('front/custom/js/rating/userrate.js') %>"></script>
+			<script>
+				$(document).ready(function () {
+					$('.userreviews').jsRapStar({ enabled: false });
+				});
+			</script>
+			<script>
+				$("#shareIconsCountInside").jsSocials({
+					url: "<%= site_url('post/details/') %><%-data._id %>",
+					text: "",
+					showLabel: false,
+					showCount: false,
+					shares: ["twitter", "facebook", "googleplus", "linkedin"]
+				});
+
+
+<% if( typeof cuurentusroffer!= "undefined" && cuurentusroffer){ %>
+var offer_id = "<%= cuurentusroffer._id !=='undefined' ? cuurentusroffer._id : '' %>";
+ <% } else { %>  
+   var offer_id = "";
+<% } %>
+
+<% if (data) { %>
+var project_id = "<%= data._id !=='undefined' ? data._id : '' %>";
+ <% } else { %>  
+   var project_id = "";
+<% } %>
+					$('body').on('click', '.reviews', function (e) {
+						$('.task-right').animate({
+							scrollTop: $(".comment-tab").offset().top
+						},
+							'slow');
+						$("#clickedbtn").click();
+						return false;
+					});
+					
+					//jQuery("#offer_amount").val(trimamount);
+					
+					
+			</script>
+
+			<style>
+				.footer--copyright {
+					display: none;
+				}
+			</style>
+			 <script type="text/javascript">
+				function initializeAutocomplete() {
+				  var input = document.getElementById('locality');
+				  // var options = {
+				  //   types: ['(regions)'],
+				  //   componentRestrictions: {country: "IN"}
+				  // };
+				  var options = {}
+			
+				  var autocomplete = new google.maps.places.Autocomplete(input, options);
+			
+				  google.maps.event.addListener(autocomplete, 'place_changed', function () {
+					var place = autocomplete.getPlace();
+					var lat = place.geometry.location.lat();
+					var lng = place.geometry.location.lng();
+					var placeId = place.place_id;
+					// to set city name, using the locality param
+					var componentForm = {
+					  locality: 'short_name',
+					};
+					var val = "";
+					for (var i = 0; i < place.address_components.length; i++) {
+					  var addressType = place.address_components[i].types[0];
+					  if (componentForm[addressType]) {
+						val = place.address_components[i][componentForm[addressType]];
+						$("city").val(val);
+					  }
+					}
+			
+					$("#latitude").val(lat);
+					$("#longitude").val(lng);
+					$("#location_id").val(placeId);
+			
+					$('#gblSearch').submit();
+				  });
+				}
+			
+				$('body').on('change', '#locality', function (e) {
+				  //e.preventDefault();
+				  var str = $(this).val();
+				  if (str.length == 0) {
+					$("#latitude").val('');
+					$("#longitude").val('');
+					$("#location_id").val('');
+				  }
+				});
+			
+			
+			  </script>
+			 

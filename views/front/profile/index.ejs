@@ -1,0 +1,248 @@
+<%- include ../layouts/header.ejs %>
+<style>
+.rapStarBack{
+color:white;
+display:inline-block;
+font-size:32px;
+margin:auto;
+position:relative;
+cursor:pointer;	
+text-shadow: 0 0 8px black;
+}	
+.rapStarFront{
+top:0px;
+color:yellow;
+display:block;
+overflow:hidden;
+position:absolute;		
+z-index:1;
+}	
+</style>
+<section id="page-profile">
+	<div class="container">  	
+		<div class="col-lg-12 col-sm-12">
+			<div class="profile-section">
+		    	<div class="card hovercard">
+		        	<div class="card-background">
+					
+					<% if (data.cover) { %>
+					<img src="<%- site_url('uploads/user/cover/') %><%= data.cover %>">
+					
+					<% } else { %>
+		          	  <img class="card-bkimg" alt="" src="<%= site_url('front/assets/images/cover_pic.png') %>">
+					  <% } %>
+		        	</div>
+		        	<div class="useravatar">
+					<% if (data.user_image) { %>
+					<img src="<%- site_url('uploads/user/profile/') %><%= data.user_image %>">
+					<% } else { %>
+		            	<img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>">
+						<% } %>
+		        	</div>		        
+		    	</div>
+		   		<div class="profile-inner">
+		    		<div class="splitter-section">
+		    			<div class="row">
+		    				<div class="col-md-6">
+		    					<div class="card-info"> 
+		        					<span class="user-name"><%= data.first_name %><%= data.last_name %></span>
+		        					
+									<div class="reviews" start="<%= data.rating %>"></div><br>
+		        					<span class="online-status">Last online 1 min ago</span>
+		        				</div>
+		    		
+		    					<div class="member-since">
+		    						<i class="fa fa-map-marker"></i> <%= data.location ? data.location : "Not Available"  %>
+		    					</div>
+		    					<div class="member-since"> 
+		    						Member since <%= convertdate(data.created_at) %>
+									
+		    					</div>
+		    				</div>
+		    				<div class="col-md-6">
+		    					<div class="member-status">
+		    						<!-- <ul class="nav nav-tabs" role="tablist">
+    									<li role="presentation" class="active"><a href="#tasker" aria-controls="tasker" role="tab" data-toggle="tab">As a Tasker</a></li>
+    									<li role="presentation"><a href="#poster" aria-controls="poster" role="tab" data-toggle="tab">As a Poster</a></li>    
+  									</ul> -->
+						 	 <!-- Tab panes -->
+						 			<!-- <div class="tab-content">
+						   				<div role="tabpanel" class="tab-pane active" id="tasker">
+						    				<p>Looks like you haven’t received any reviews just yet.</p>
+						    				<a href="#">Let’s browse available tasks.</a>
+						   				</div>
+						   				<div role="tabpanel" class="tab-pane" id="poster">
+						  					 <p> Looks like you haven’t received any reviews just yet.</p>
+						  			 		<a href="#">Let’s go post a task.</a>
+										</div>						    
+						 		 	</div> -->
+		    					</div>		    				
+		    				</div>
+		    			</div>
+		   			</div>	
+
+		   			 <div class="splitter-section">
+		    			<div class="row">
+		    				<div class="col-lg-12">
+		    					<h4>About</h4>
+								<% if(typeof data.description!="undefined") { %>
+		    					<p><%= data.description ? data.description : "" %></p>
+								<%} %>
+		    				</div>
+		    			</div>
+		   			</div>
+					
+		  			<div class="splitter-section">
+		   			 	<div class="row">
+		    				<div class="col-sm-12">
+		    					<h4>Portfolio</h4>
+						<% if(portfolio.length > 0) { %>
+		    					<ul class="attachments">
+								 <% portfolio.forEach(function(value) { %>
+		    						<li><img src="<%- site_url('uploads/portfolio/') %><%= value.image %>"> </li>
+		    						<% }); %>  
+		    					</ul>
+									<% } else { %>
+									<ul class="attachments">
+									<li><img src="<%- site_url('/uploads/category/placeholder.png') %>"></li>
+									
+		    						</ul>
+									<% } %>
+		    				</div>
+		    			</div>
+		    		</div>
+					
+		    		<div class="splitter-section">
+		    			<div class="row">
+		    				<div class="col-sm-12">
+		    					<h4>Skills</h4>
+		    					<div class="row">
+		    						<div class="col-md-2">
+		    							<div class="skill-title">Education</div>
+		    							<div class="skill"><span class="tags"><% if(typeof skill!="undefined") { %><%= skill ? skill.qualification : "None" %> <%} %></span></div>
+		    						</div>
+		    						<div class="col-md-2">
+		    							<div class="skill-title">Specialities</div>
+		    							<div class="skill"><span class="tags"><% if(typeof skill!="undefined") { %><%= skill ? skill.good_at : "None" %><%} %></span></div>
+		    						</div>
+		    						<div class="col-md-2">
+		    							<div class="skill-title">Languages</div>
+		    							<div class="skill">
+		    								<span class="tags"><% if(typeof skill!="undefined") { %><%= skill ? skill.languages : "None" %><%} %></span>
+		    							</div>
+		    						</div>
+		    						<div class="col-md-2">
+		    							<div class="skill-title">Work</div>
+		    							<div class="skill">
+		    								<span class="tags"><% if(typeof skill!="undefined") { %><%= skill ? skill.experience : "None" %><%} %></span>
+		    							</div>
+		    						</div>
+		    						<div class="col-md-2">
+		    							<div class="skill-title">Transportation</div>
+		    							<div class="skill">
+										<span class="tags">
+										<% if(typeof skill!="undefined" && skill!=null){ %>
+										<%= skill.get_around ? skill.get_around : ""%>
+										<% } else{ %>
+											None
+											<% } %></span>
+		    							</div>
+		    						</div>
+		    					</div>
+		    				</div>
+		    			</div>
+		    		</div>
+					
+					
+					<div class="splitter-section">
+		    			<div class="row">
+		    				<div class="col-md-12">
+		    					<h4>Reviews</h4>
+								<div class="col-md-8"></div>
+								<div class="col-md-4"></div>
+							</div>
+						</div>
+						
+						
+						
+						<div class="row">
+		    				<div class="col-md-12">
+							
+							 <% userreviews.forEach(function(value) { %>
+							 
+							 <div class="col-md-6">
+							 <div class="col-md-3">
+							 <% if (value.from_id.user_image) { %>
+										<img src="<%- site_url('uploads/user/profile/') %><%= value.from_id.user_image %>" class="img-responsive" style="width:200px; border-radius: 50%;height: 100px;" >
+									<% } else { %>
+									   <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive" style="width:200px; border-radius: 50%;height: 100px;">
+									<% } %>
+							 </div>
+							 <div class="col-md-9">
+										<div class="reviews" start="<%= value.rating %>"></div><br>
+										<a href="<%= site_url('post/details/') %><%= value.post_id._id %>" class=""><%= value.post_id.title %></a><br>
+										<a class="user-name" href="<%= site_url('profile/') %><%-value.from_id.first_name %><%-value.from_id.last_name %>/<%-value.from_id._id %>"><%-value.from_id.first_name %>  <%-value.from_id.last_name %></a> Said -<%= value.review %><br>
+							 </div>
+							 
+							 </div>
+							
+						<% }); %>
+						</div>
+						</div>
+					</div>
+					
+					
+					
+					
+					
+		   			 <div class="splitter-section">
+		    			<div class="row">
+		    				<div class="col-md-12">
+		    					<h4>Badges</h4>
+		    					<div class="row">
+		    						<div class="col-md-3 badge-box">
+		    							<div class="badge-label">Mobile</div>
+										<p>Reassure members you are who you say.</p>
+										<% if(data.mobile_verify==1 ){ %>
+											<span class="btn btn--primary btn--bordered btn--rounded">Mobile Verified</span>
+											
+											<% } else { %>
+												<span class="btn btn--primary btn--bordered btn--rounded">Not Verified</span>
+											<% } %>
+									</div>
+		    						<div class="col-md-3 badge-box">
+										<div class="badge-label">Payment Method</div>
+										<p>Reassure members you are who you say.</p>
+										
+										<% if(paymentmethod){ %>
+											<span class="btn btn--primary btn--bordered btn--rounded">Payment Verified</span>
+										<% } else { %>
+											<span class="btn btn--primary btn--bordered btn--rounded">Not Verified</span>
+										<% } %>
+		    							
+		    						</div>
+		    						
+		    					</div>
+		    				</div>
+		    			</div>
+		    		</div>
+		    	</div>		    	
+		    </div>
+		</div>		
+	</div>
+</section>
+
+<%- include ../layouts/footerscripts.ejs %>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/skill.js') %>"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/rating/rating.js') %>"></script>
+<script>
+$(document).ready(function(){
+$('.reviews').jsRapStar({enabled:false});
+});
+</script>
+
+
+

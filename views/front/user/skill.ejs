@@ -1,0 +1,130 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+        <section id="page-dashbord">
+                <div class="container">
+                    <div class="row">
+                    <%- include ../user/sidebar.ejs %>
+                    <div class="col-md-9 col-sm-9 col-xs-12 right-inner">
+                        <div class="pageinner">
+                          <h5>Skills</h5>
+                        </div>
+			
+     <form id="skill-form" name="skill-form" role="from">
+         <p>These are your skills. Keep them updated with any new skills you learn so other members can know what you can offer.</p>
+
+         <div class="form-group">
+         <% 
+         var good_at_arr = [];
+         if(skilldata && skilldata.good_at){
+            good_at_arr = skilldata.good_at.split(',');
+         }
+
+         %>
+           <label for="good_at" class="control-lable">What are you good at?</label>
+           <select name="good_at"  class="form-control" id="good_at" multiple="multiple">
+           <%good_at_arr.forEach(function(good_elem){ %>
+            <option selected value="<%- good_elem %>" ><%- good_elem %> </option>
+           <% }) %>
+           </select>
+
+         </div>
+
+         <div class="form-group">
+
+    		 <% 
+         var array = [];
+         if(skilldata && skilldata.get_around){ 
+         var string= skilldata.get_around ;
+    			array = string.split(',');
+         }
+         %>
+           <label for="get_around" class="control-lable">How do you get around?</label>
+
+           <div class="checkbox">
+             <label class="checkbox-lnline">
+               <input type="checkbox" name="get_around" id="get_around" value="Bicycle"  <%- (array.indexOf('Bicycle') > -1 ) ? "checked" : "" %> > Bicycle
+             </label>
+             <label class="checkbox-lnline">
+               <input type="checkbox" name="get_around" id="get_around" value="Car" <%- (array.indexOf('Car') > -1 ) ? "checked" : "" %> > Car
+             </label>
+              <label class="checkbox-lnline">
+               <input type="checkbox" name="get_around" id="get_around" value="Online" <%- (array.indexOf('Online') > -1 ) ? "checked" : "" %>> Online
+             </label>
+             <label class="checkbox-lnline">
+               <input type="checkbox" name="get_around" id="get_around" value="Scooter" <%- (array.indexOf('Scooter') > -1 ) ? "checked" : "" %>> Scooter
+             </label>
+             <label class="checkbox-lnline">
+               <input type="checkbox" name="get_around" id="get_around" value="Truck" <%- (array.indexOf('Truck') > -1 ) ? "checked" : "" %>> Truck
+             </label>
+             <label class="checkbox-lnline">
+               <input type="checkbox" name="get_around" id="get_around" value="Walk" <%- (array.indexOf('Walk') > -1 ) ? "checked" : "" %>> Walk
+             </label>
+           </div>
+         </div>
+
+         <div class="form-group">
+          <% 
+         var languages_arr = [];
+         if(skilldata && skilldata.languages){ 
+          languages_arr = skilldata.languages.split(',');
+         }
+
+         %>
+
+           <label for="languages" class="control-lable">What languages can you speak/write?</label>
+          <select name="languages"  class="form-control" id="languages" multiple="multiple">
+            <% languages_arr.forEach(function(elem){ %>
+            <option selected value="<%- elem %>" ><%- elem %> </option>
+           <% }) %>
+
+
+          </select>
+         </div>
+
+         <div class="form-group">
+           <label for="qualification" class="control-lable">What qualifications have you got?</label>
+            <input type="text" name="qualification" class="form-control" id="qualification" placeholder="e.g. Higher School Certificate (HSC), Accredited Barista" value="<%= (skilldata) ?  skilldata.qualification : '' %>">
+         </div>
+
+         <div class="form-group">
+           <label for="experience" class="control-lable">What's your work experience?</label>
+           <input type="text" name="experience" class="form-control" id="experience" placeholder="e.g. 3 years as a Barista at The Cafe" value="<%= (skilldata) ? skilldata.experience : '' %>">
+         </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn--primary"> Save Skills</button>
+          </div>
+
+      </form>
+	
+	
+           
+         </div>
+        </div>
+
+      </div>
+  </div>
+</section>
+
+<%- include ../layouts/footerscripts.ejs %>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/skill.js') %>"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+
+
+var str = "<%= (skilldata) ? skilldata.good_at : "" %>";
+var arr = str.split(",");
+
+var str = "<%= (skilldata) ? skilldata.get_around : "" %>";
+var get_around = str.split(",");
+
+
+$("select").select2({
+	tags: true,
+    tokenSeparators: [',', arr]
+})
+</script>
+
+

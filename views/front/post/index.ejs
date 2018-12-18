@@ -1,0 +1,234 @@
+<%- include ../layouts/header.ejs %>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSlhXQ8ixpBW6CLmCJWOIvQXmwzXwlbj4&v=3.exp&sensor=false&libraries=places"></script>
+
+<section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+	<div class="bg-section">
+		<img src="<%- site_url('front/assets/images/headerbg.jpg') %>" alt="Background" />
+
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<div class="title title-1 text-center">
+					<div class="title--content">
+						<div class="title--heading">
+							<h1>Get Quote</h1>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<ol class="breadcrumb">
+						<li><a href="#">Home</a></li>
+						<li class="active">Get Quote</li>
+					</ol>
+					<div class="divider--shape-1down"></div>
+				</div>
+				<!-- .title end -->
+			</div>
+			<!-- .col-md-12 end -->
+		</div>
+		<!-- .row end -->
+	</div>
+	<!-- .container end -->
+</section>
+<section id="getquote">
+	<div class="container">
+		<div class="row">
+			<form action="#" id="addtask" enctype="multipart/form-data" class="form-listing" method="post" accept-charset="utf-8">
+				<input type="hidden" name="category_id" value="<%- data._id %>">
+
+				<div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
+					<div class="quote-form">
+						<div class="row">
+							<div class="heading col-sm-12">
+								<h2 class="heading--title text-center">Get Free Quotes</h2>
+							</div>
+						</div>
+						<h6>Details</h6>
+						<div class="form-group">
+							<label for="title">Task Title <span class="text-danger">*</span></label>
+							<input type="text" id="title" name="title" class="form-control" placeholder="e.g Clean my bedroom apartment">
+						</div>
+
+						<div class="form-group">
+							<label for="description">Describe your task in more detail <span class="text-danger">*</span> <br>
+								<small>For your safety, please do not share personal information, e.g., email, phone or address.</small>
+							</label>
+							<textarea maxlength="500" class="form-control" id="description" name="description" rows="2" placeholder="e.g Clean my  apartment top to bottom"
+							 aria-required="true"></textarea>
+							<span id="rchars">500</span> Character(s) Remaining
+
+						</div>
+						<div class="form-group">
+							<label for="category">Category <span class="text-danger">*</span>
+								<select class="form-control" id="category" name="category">
+									<% categories.forEach(function(value) { %>
+									<option value="<%= value._id %>">
+										<%= value.title %>
+									</option>
+									<% }); %>
+
+								</select>
+						</div>
+
+						<h6>Budget</h6>
+						<div class="form-group">
+							<label for="tasker_need">How many people do you need for your task? <span class="text-danger">*</span></label>
+							<input type="number" class="form-control" id="tasker_need" name="tasker_need" min="1" max="20">
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="budget">What's your budget?</label> <br>
+									<!-- <label class="radio-inline">
+										<input type="radio" name="budget_type" id="budget_type" value="total" value="option2"> Total
+									</label> -->
+									<!-- <label class="radio-inline">
+										<input type="radio" name="budget_type" id="budget_type" value="hourly" value="option3"> Hourly rate
+									</label> -->
+								</div>
+
+								<div class="form-group">
+									<div class="input-group">
+										<span class="input-group-addon" id="basic-addon1">$</span>
+										<input type="number" class="form-control" id="budget" name="budget" aria-describedby="basic-addon1">
+									</div>
+								</div>
+							</div>
+							<input type="hidden" name="priceguide" id="priceguide" value="0">
+						</div>
+
+
+						<div class="form-group">
+							<p>Must-haves (optional) </p>
+							<p>Add up to 3 things the Tasker needs to have or do to make an offer</p>
+							<a class="btn btn--primary" role="button" data-toggle="collapse" href="#optional"><i class="fa fa-plus-circle"></i>
+								Add must have option</a>
+						</div>
+
+						<div class="collapse" id="optional">
+							<p>Add up to 3 things the Tasker needs to have or do to make an offer</p>
+							<div class="form-group">
+								<input type="text" class="form-control" id="make_an_offer" name="make_an_offer" placeholder="What must they have or do?">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="make_an_offer" name="make_an_offer" placeholder="What must they have or do?">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="make_an_offer" name="make_an_offer" placeholder="What must they have or do?">
+							</div>
+							<p>e.g. Must have own van or truck<br>
+								e.g. Must have excel and powerpoint experience</p>
+						</div>
+
+						<h6>Location</h6>
+						<div class="form-group">
+							<label for="person_type">Where would the task be completed? <span class="text-danger">*</span></label>
+
+							<div class="radio-group">
+								<div class="radio-box">
+									<div class="radio">
+										<label class="rado-inline">
+											<input type="radio" name="person_type" value="1">
+											In person
+										</label>
+										<p>Select this if you need the person there.</p>
+									</div>
+								</div>
+								<div class="radio-box">
+									<div class="radio">
+										<label class="rado-inline">
+											<input type="radio" name="person_type" value="2">
+											Online
+										</label>
+										<p>Select this if they can work from anywhere.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="clearfix"></div>
+						<div class="form-group ">
+							<label for="suburb">Location <span class="text-danger">*</span></label>
+							<input type="text" name="suburb" class="form-control" placeholder="Location" onFocus="initializeAutocomplete()"
+							 id="suburb">
+						</div>
+						<input type="hidden" name="city" id="city" placeholder="City" value="">
+						<input type="hidden" name="lat" id="latitude" placeholder="Latitude" value="">
+						<input type="hidden" name="lng" id="longitude" placeholder="Longitude" value="">
+						<input type="hidden" name="place_id" id="location_id" placeholder="Location Ids" value="">
+						<div class="form-group">
+							<label for="due_date">Due date <span class="text-danger">*</span></label>
+
+							<input type="text" id="due_date" name="due_date" class="form-control" placeholder="tuh, 30 aug">
+						</div>
+						
+						<div class="form-action text-center">
+							<button class="btn btn--primary btn--rounded">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+<script>
+	$(document).ready(function () {
+		$('#due_date').datepicker({ minDate: 0 });
+
+	});
+</script>
+
+<%- include ../layouts/footer.ejs %>
+
+
+<script src="<%= site_url('front/custom/js/app.js') %>"></script>
+<script src="<%= site_url('front/task/task.js') %>"></script>
+
+<!---geolocation code --------->
+<script type="text/javascript">
+	function initializeAutocomplete() {
+		var input = document.getElementById('suburb');
+		// var options = {
+		//   types: ['(regions)'],
+		//   componentRestrictions: {country: "IN"}
+		// };
+		var options = {}
+
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+		google.maps.event.addListener(autocomplete, 'place_changed', function () {
+			var place = autocomplete.getPlace();
+			var lat = place.geometry.location.lat();
+			var lng = place.geometry.location.lng();
+			var placeId = place.place_id;
+			// to set city name, using the locality param
+			var componentForm = {
+				suburb: 'short_name',
+			};
+			for (var i = 0; i < place.address_components.length; i++) {
+				var addressType = place.address_components[i].types[0];
+				if (componentForm[addressType]) {
+					var val = place.address_components[i][componentForm[addressType]];
+					document.getElementById("city").value = val;
+				}
+			}
+			document.getElementById("latitude").value = lat;
+			document.getElementById("longitude").value = lng;
+			document.getElementById("location_id").value = placeId;
+		});
+	}
+
+
+	/*text area validation*/
+	var maxLength = 500;
+	$('textarea').keyup(function () {
+		var textlen = maxLength - $(this).val().length;
+		$('#rchars').text(textlen);
+	});
+
+
+</script>
+
+<!-----end here ---->

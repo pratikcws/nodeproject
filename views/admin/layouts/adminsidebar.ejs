@@ -1,0 +1,51 @@
+<aside class="main-sidebar">
+<section class="sidebar">
+<div class="user-panel">
+    
+     <div class="pull-left image">
+          <img src="<%= site_url('application/plugins/dist/img/user_icon.jpg') %>" class="img-circle" alt="User Image" style="height:45px; width:45px;" />
+        </div>
+        <div class="pull-left info">
+          <p>Super Admin</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="header"></li>
+            <li <%if(typeof active_tab != "undefined"  && active_tab == "dashboard"){%> class="active" <%}%>> 
+                <a href="<%= site_url('admin/dashboard') %>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a>
+            </li  <%if(typeof active_tab != "undefined"  && active_tab == "dashboard"){%> class="active" <%}%>>
+            
+			<li  <%if(typeof active_tab != "undefined"  && active_tab == "users"){%> class="active" <%}%>>
+                <a href="<%= site_url('admin/users') %>"><i class="fa fa-users"></i> <span> Users </span></i></a>
+            </li>
+
+            <li  <%if(typeof active_tab != "undefined"  && active_tab == "post"){%> class="active" <%}%>> 
+                <a href="<%= site_url('admin/paymentrequest') %>"><i class="fa fa-list"></i> <span> Payment Request </span></i></a>
+            </li>
+            
+			<li  <%if(typeof active_tab != "undefined"  && active_tab == "post"){%> class="active" <%}%>> 
+                <a href="<%= site_url('admin/post') %>"><i class="fa fa-list"></i> <span> Posts </span></i></a>
+            </li>
+
+			<li  <%if(typeof active_tab != "undefined"  && active_tab == "category"){%> class="active" <%}%>> 
+                <a href="<%= site_url('admin/category') %>"><i class="fa fa-tags"></i> <span> Categories </span></i></a>
+            </li>
+			
+			<li  <%if(typeof active_tab != "undefined"  && active_tab == "transaction"){%> class="active" <%}%>> 
+                <a href="<%= site_url('admin/transaction') %>"><i class="fa fa-money"></i> <span> Transaction </span></i></a>
+            </li>
+
+            <li  <%if(typeof active_tab != "undefined"  && active_tab == "contactus"){%> class="active" <%}%>> 
+                <a href="<%= site_url('admin/contactus') %>"><i class="fa fa-users"></i> <span> Contact Us </span></i></a>
+            </li>
+			<!---<li  <%if(typeof active_tab != "undefined"  && active_tab == "role"){%> class="active" <%}%>> 
+                <a href="<%= site_url('admin/role') %>"><i class="fa fa-list"></i> <span> Roles </span></i></a>
+            </li>--->
+			
+            <li> 
+                <a href="<%= site_url('admin/logout') %>"><i style="color:red" class="fa fa-sign-out"></i> <span> Logout </span></i></a>
+            </li>
+        </ul>
+    </section>
+</aside>

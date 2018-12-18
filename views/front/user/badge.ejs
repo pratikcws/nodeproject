@@ -1,0 +1,240 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+<section id="page-dashbord">
+  <div class="container">
+    <div class="row">
+      <%- include ../user/sidebar.ejs %>
+      <div class="col-md-9 col-sm-9 col-xs-12 right-inner">
+			<form>
+
+        <h2>Badges</h2>
+        
+        <p>Badges help members be sure who you are and what you can do! The more you collect, the more Job Posters and Taskers will trust in your abilities.
+        </p>
+        <p> Badges are issued when specific requirements are met. A green tick shows that the verification is currently active. </p>
+
+        <h6>ID Badges</h6>
+
+        <div class="row">
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-user"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Police Check</label><p>Provide peace of mind to other members by successfully completing a Police Check</p></div>
+              <div class="actions">
+                <a href="<%= site_url("account/badge/police-verification")%>" class="btn-sm btn btn--primary">Add</a>
+              </div>
+             </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="icon icon-Mastercard"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Digital iD</label><p>Give members a reason to choose you - knowing that your identity is verified with Australia Post’s Digital iD.</p></div>
+              <div class="actions">
+                <a href="#" class="btn-sm btn btn--primary">Add</a>
+              </div>
+             </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-credit-card"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Payment Method</label><p>Make payments with ease by having your payment method verified.</p></div>
+              <div class="actions">
+             
+              <% if (paymentverify) { %>
+                 <span>verified</span>
+              <% } else { %>
+                 <a href="<%= site_url("account/payment-methods") %>" class="btn-sm btn btn--primary">Add</a>
+              <% } %>
+              
+               
+              </div>
+             </div>
+          </div>
+
+
+           <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-mobile"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Mobile</label><p>Verified when you join, you'll receive instant task notifications and can make free calls via Airtasker.</p></div>
+              <div class="actions">
+
+               <% if(bagdedata.mobile_verify==1) { %>
+                 <span>verified</span>
+               <% } else { %>
+                 <a href="<%= site_url("account/mobile-settings") %>" class="btn-sm btn btn--primary">Add</a>
+               <% } %>
+              
+               
+                
+              </div>
+             </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-facebook"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Facebook</label><p>Connect your Facebook profile to build your online social reputation.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-twitter"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Twitter</label><p>Connect your Twitter profile to build your online social reputation.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-linkedin"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>LinkedIn</label><p>Connect your professional Linkedin profile to build your online social reputation.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+        </div>
+
+        <h6>Licence Badges</h6>
+
+        <div class="row">
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-plug"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Electrical</label><p>Let others know you hold an electrical contractor licence with this badge.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-wrench"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Plumbing</label><p>Let others know you hold a valid Plumbing licence with this badge.s</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-fire-extinguisher"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Gasfitting</label><p>Let others know you hold a valid Gasfitting licence with this badge.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-file-text"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Trades Insurance</label><p>Let people know you’re covered by your own public liability insurance.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-cube"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Working With Children</label><p>Let others know you hold a valid Working with Children Check with this badge.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+
+
+           <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <i class="fa fa-crosshairs"></i>
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Asbestos Removal</label><p>Let others know you hold a valid asbestos removal licence with this badge.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+
+
+        </div>
+
+        
+        <h6>Partnership Badges</h6>
+
+        <div class="row">
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <img src="<%- site_url('front/assets/images/ikea_3x.png') %> " class="img-responsive">
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>IKEA</label><p>Showcase your furniture assembly expertise with an IKEA Badge. </p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+
+          <div class="col-sm-6 badge-box">
+            <div class="badege-icon">
+              <img src="<%- site_url('front/assets/images/coles-badge_3x.png') %> " class="img-responsive">
+            </div>
+             <div class="badged-description">
+              <div class="description"><label>Coles</label><p>Undertake personal shopping tasks for Coles customers.</p></div>
+              <div class="actions">
+                <button class="btn-sm btn btn--primary">Add</button>
+              </div>
+             </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+
+  </div>
+</section>
+
+<%- include ../layouts/footerscripts.ejs %>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/badge.js') %>"></script>
+
+

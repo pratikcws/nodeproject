@@ -1,0 +1,351 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="signupmodal">
+    <div class="modal-dialog modal-signin" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                 <h4 class="modal-title">Join us</h4>
+             </div>
+             
+            <div class="modal-body">
+                
+				<form action="#" method="get" name="SignupSubmitFrm" id="SignupSubmitFrm" accept-charset="utf-8">
+                  
+				<% if (typeof refid != "undefined") { %>
+				<input type="hidden" name="refid" value="<%- refid %>" />
+				<% } %>				
+				
+				<div class="form-group">
+                    <label for="first_name">First Name</label><span class="text-danger">*</span>
+                    <input class="form-control" type="text" class="first-name" name="first_name" id="first_name" placeholder="First Name">
+                </div>
+                   
+				<div class="form-group">
+                    <label for="last_name">Last Name</label><span class="text-danger">*</span>
+                    <input class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name">
+                </div>
+				
+                <div class="form-group">
+                    <label for="email">Email Address </label><span class="text-danger">*</span>
+                     <input class="form-control" type="text"  name="email" id="email" placeholder="Email address" >
+                </div>
+
+				<div class="form-group">
+                    <label for="mobile_number">Mobile Number</label><span class="text-danger">*</span>
+                    <input class="form-control" type="text"  name="mobile_number" id="mobile_number" placeholder="Mobile Number" >
+                </div>
+				    
+                <div class="form-group">
+                    <label for="password">Password </label><span class="text-danger">*</span>
+                    <input type="password" class="form-control" placeholder="Password" name="password" id="password">
+                </div>
+				
+                <div class="form-group">
+                    <label for="conf_password">Confirm Password</label><span class="text-danger">*</span>
+                    <input type="password" class="form-control" placeholder="Confirm password" name="conf_password" id="conf_password">
+                </div>
+
+    			<div class="form-button">
+                    <button id="submit" type="submit" class="btn btn--primary btn--rounded btn--block">Join Expertie</button>
+                </div>
+				
+			    <div class="form-group">
+
+                    <!-- <a href="#" class="btnfb">facebook</a> -->
+
+                </div>
+
+                <p>By signing up, I agree to Expertie <a href="#">Terms & Conditions</a>, and <a href="#">Community Guidelines</a>. <a  href="#">Privacy Policy</a></p> 
+				
+			</form>
+        </div>
+        <div class="modal-footer">
+            Already have an account ?
+             <a href="#" id="loginopen" > Login</a>
+      </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+</div>
+<!-- /.loginmodal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="loginmodaltest">
+    <div class="modal-dialog modal-signin" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                 <h4 class="modal-title">Login</h4>
+             </div>
+            <div class="modal-body">
+
+			   <form action="#" method="post" name="loginSubmitFrm" id="loginSubmitFrm" >
+                <div class="form-group">
+                    <label for="exampleInputEmail1">E-mail Address</label><span class="text-danger">*</span>
+                    <input class="form-control" type="text" name="email" placeholder="E-mail Address" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label><span class="text-danger">*</span>
+                    <input class="form-control" type="password" name="password" placeholder="Password" required>
+                </div>
+				
+				<button id="submit" type="submit" class="btn btn--primary btn--rounded btn--block">Login</button>
+				
+                
+                <!-- <div class="loginseparator">or login  with</div> -->
+                <div class="form-group">
+
+                    <!-- <a href="#" class="btnfb">facebook</a> -->
+
+                </div>
+                <p><a href="#" id="Forgetpass">Forgot Password?</a></p>                
+        </div>
+		</form>
+        <div class="modal-footer">
+            Don't have an account ?
+             <a href="#" id="signupmode"> Sign up</a>
+      </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="Forgetpassmodal">
+    <div class="modal-dialog modal-signin" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                 <h4 class="modal-title">Forget Password</h4>
+             </div>
+            <div class="modal-body">
+				<form action="#" method="get" name="forgetFrm" id="forgetFrm" >
+                    <div class="form-group">
+						<label for="exampleInputEmail1">Email address</label>
+						<input class="form-control" type="text" name="email" placeholder="E-mail Address" required>
+					</div>
+					
+					<div class="form-group remember">
+                        <a href="#" id="loginopen" title="">Back to login ?</a>
+                    </div>
+                    <div class="btn-more">
+                        <button id="submit" type="submit" class="btn btn--primary btn--rounded btn--block">Forget Password</</button>
+                    </div>
+                </form><!-- /form -->
+			               
+			</div>
+		
+        <div class="modal-footer">
+            Don't have an account ?
+             <a href="#" id="signupmode"> Sign up</a>
+      </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+</div>
+
+
+            
+<footer id="footer" class="footer footer-1 text-center">
+    <!-- Widget Section
+	============================================= -->
+    <div class="footer--widget text--center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="footer--widget-content">
+                        <h3>Looking to earn some extra money or choose when and how you work?</h3>
+                        <a href="#" class="btn btn--primary btn--bordered" >Become a Tasker</a>
+                        
+                    </div>
+                </div>
+                <!-- .col-md-3 end -->
+                <div class="col-xs-12 col-sm-4 col-md-4 hidden-xs">
+                   <div class="footer-img">
+                    <img src="<%- site_url('front/assets/images/worker1.png') %>">
+                </div>
+                </div>
+                <!-- .col-md-3 end -->
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="footer--widget-content">
+                        <h3>Our Social</h3>
+	                    <div class="footer--social-icons">
+	                        <a href="#"><i class="fa fa-facebook"></i></a>
+	                        <a href="#"><i class="fa fa-twitter"></i></a>
+	                        <a href="#"><i class="fa fa-instagram"></i></a>
+	                        <a href="#"><i class="fa fa-pinterest"></i></a>
+	                        <a href="#"><i class="fa fa-youtube"></i></a>
+	                    </div>                   
+                    </div>
+                </div>
+                <!-- .col-md-3 end -->
+
+            </div>
+        </div>
+        <!-- .container end -->
+    </div>
+    <!-- .footer-widget end -->
+
+    <!--Social============================================= -->
+    <div class="footer--social text-left">
+
+        <div class="container"> <hr>
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                   <h4>Discover</h4>
+                   <ul>
+                    <li><a href="#"> Expertie cards</a></li>
+                    <li><a href="<%= site_url('pages/howitworks') %>">How it works</a></li>
+                    <li><a href="#">  <a href="#">Expertie for business</a></li>
+                    <li><a href="#">Earn money</a></li>
+                    <li><a href="<%= site_url('pages/faq') %>">New users FAQ</a></li>
+                </ul>
+                </div>
+                 <div class="col-xs-12 col-sm-3 col-md-3">
+                   <h4>Company</h4>
+                   <ul>
+                    <li><a href="<%= site_url('pages/howitworks') %>">About us</a></li>
+                    <li><a href="<%= site_url('pages/careers') %>">Careers</a></li>
+                    <li><a href="#">Community guidelines</a></li>
+                    <li><a href="<%= site_url('pages/termsandcondition') %>">Terms & conditions</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="<%- site_url('contactus') %>">Contact us</a></li>
+                    <li><a href="<%= site_url('pages/privacypolicy') %>">Privacy policy</a></li>
+                </ul>
+                </div>
+                 <div class="col-xs-12 col-sm-3 col-md-3">
+                   <h4>Existing Members</h4>
+                   <ul>
+                    <li><a href="<%- site_url('account/addtask') %>"> Post a task</a></li>
+                    <li><a href="<%- site_url('post/browse') %>">Browse tasks</a></li>
+                    <li><a href="#">Support centre</a></li>
+                    <li><a href="#">Merchandise</a></li>
+                   
+                </ul>
+                </div>
+                 <div class="col-xs-12 col-sm-3 col-md-3">
+                   <h4>Popular Categories</h4>
+                   <ul>
+				  
+				  
+                  
+                    <% if(typeof catdata !="undefined") { %> 
+				  					
+                  <%  var category = catdata.slice(0, 5);   %>
+                  <% console.log(category) %>
+                <% if(typeof category !='undefined' && category.length > 0){ %>
+                  
+                   <% category.forEach(function(value) {  %>
+                    <% if(value._id){ %>
+                        <li> 
+                            <a href="<%- site_url('account/addtask/') %><%= value._id%>"><%= value.title %></a>
+                        </li>
+                        <% } %>
+                        <% }); %>	
+                    <% } %>
+                    <% } %>
+
+                    		
+					
+				
+				   
+				   
+                </ul>
+                </div>    
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </div>
+    <!-- .footer-widget end -->
+    <!-- Copyrights
+	============================================= -->
+    <div class="footer--copyright text-center">
+        <div class="divider--shape-dark"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <span>&copy; Expertie Pvt. Ltd 2018 , All rights reserved </span> 
+                </div>
+            </div>
+        </div>
+        <!-- .container end -->
+    </div>
+    <!-- .footer-copyright end -->
+</footer>
+        </div>
+		
+		
+		
+        <!-- #wrapper end -->
+        <!-- Footer Scripts============================================= -->
+        
+        <script src="<%- site_url('front/assets/js/plugins.js') %>"></script>
+        <script src="<%- site_url('front/assets/js/functions.js') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/jquery.themepunch.tools.min.js?rev=5.0') %>') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/jquery.themepunch.revolution.min.js?rev=5.0') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/extensions/revolution.extension.video.min.js') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/extensions/revolution.extension.slideanims.min.js') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/extensions/revolution.extension.actions.min.js') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/extensions/revolution.extension.layeranimation.min.js') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/extensions/revolution.extension.kenburn.min.js') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/extensions/revolution.extension.navigation.min.js') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/extensions/revolution.extension.migration.min.js') %>"></script>
+        <script src="<%- site_url('front/assets/revolution/js/extensions/revolution.extension.parallax.min.js') %>"></script>
+        <!-- RS Configration JS Files -->
+        <script src="<%- site_url('front/assets/js/rsconfig.js') %>"></script>
+        <script src="<%- site_url('front/custom/js/auth/signup.js') %>"></script>
+		<script src="<%- site_url('front/custom/js/auth/forgetpass.js') %>"></script>
+        
+		
+		<script>
+				var protocol = location.protocol;
+				var slashes = protocol.concat("//");
+				var host = slashes.concat(window.location.hostname);
+				var HTTP_PATH = host+':'+window.location.port+'/';
+			</script>		
+		<script type="text/javascript" src="<%= site_url('front/custom/js/auth/login.js') %>"></script>
+		<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+		<script type="text/javascript">
+
+// $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+// 	$('.carousel-con').owlCarousel('refresh');
+// });
+
+
+
+function initialize_owl(el) {
+    el.owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        autoplay:true,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                
+            },
+            600: {
+                items: 2,
+              
+            },
+            1000: {
+                items: 3,               
+                
+            }
+        }
+    });
+}
+
+function destroy_owl(el) {
+    //el.data('owlCarousel').destroy();
+}
+
+
+
+
+
+</script>
+    </body>
+</html>

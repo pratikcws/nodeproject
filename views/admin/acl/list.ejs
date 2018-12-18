@@ -1,0 +1,54 @@
+<%- include ../layouts/adminheader.ejs %>
+<%- include ../layouts/adminsidebar.ejs %>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <div class="pull-left">
+                            <h3 class="box-title">ACL List</h3>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-default back_to_history"> <span class="fa fa-arrow-left"> Go Back</a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                    <div class="row"> 
+                        <span class="">
+                          <label style="margin:0px 45px 0px 25px">#</label>
+                        </span>
+                         <% for(var i=0; i< roledata.length; i++) {%>
+                          <span class="">  
+                            <label style="margin:0px 40px;"><%=roledata[i].role_title%></label>
+                            </span>
+                         <%}%>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <% for(var p=0; p< permissiondata.length; p++) {%>
+                         <div class="row"> 
+                            <span>
+                              <label style="margin:0px 45px 0px 25px"><%=permissiondata[p].permission_title %></label>
+                            </span>
+                             <% for(var i=0; i< roledata.length; i++) {%>
+                              <span class="">  
+                                <label style="margin:0px 40px;"><input type="checkbox"  data-toggle="toggle" data-size="mini" class="prn_tgl_btn">  </label>
+                                </span>
+                             <%}%>
+
+                            </div>
+                            <hr>
+                            <%}%>
+                        </div>
+                        
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+<script src="../../admin/custom/acl/list.js"></script>
+<%- include ../layouts/adminfooter.ejs %>

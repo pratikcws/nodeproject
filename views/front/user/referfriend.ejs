@@ -1,0 +1,118 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+        <section id="page-dashbord">
+                <div class="container">
+                    <div class="row">
+                    <%- include ../user/sidebar.ejs %>
+                    <div class="col-md-9 col-sm-9 col-xs-12 right-inner account-referrals">
+                      <div class="reffrel">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <img src="<%- site_url('front/assets/images/offer.png') %>">
+                          </div>
+                          <div class="col-sm-8">
+                            <h6>Invite a friend </h6>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                          <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" value="<%- site_url('invite-user/') %><%- userdata %>" id="myInput" class="form-control">
+                            <span class="input-group-btn">
+                              <button onclick="myFunction()" class="btn btn-info btn-sm" type="button">Copy Link</button>
+                            </span>
+                          </div>
+                        </div>
+						<div id="shareIconsCountInside"> </div>
+
+                          </div>
+                         </div>
+                        </div>
+                        
+                        
+                      
+                      <!-- <h6 class="text-center">You’ve got $0 Findtasker Credit right now. Time to refer some friends!</h6>
+
+                      <h6 class="text-center">How referrals work</h6>
+
+                      <hr class="hr"> -->
+
+                        <!-- <div class="steps large">
+                          <div class="stage">
+                            <div class="number-container">
+                              <span class="number">1</span>
+                            </div>
+                            <div class="description">
+                              <h5>Invite your friends</h5>
+                              <p>Your friend signs up using your referral code.</p>
+                            </div>
+                          </div>
+                          <div class="stage">
+                            <div class="number-container">
+                              <span class="number">2</span>
+                            </div>
+
+
+                            <div class="description">
+                              <h5>Their first task is done</h5>
+                              <p>After joining Findtasker, they post a task and get it completed.</p>
+                            </div>
+                          </div>
+                          <div class="stage">
+                            <div class="number-container">
+                              <span class="number">3</span>
+                            </div>
+                            <div class="description">
+                              <h5>You get $10 credit</h5>
+                              <p>For every friend you refer, you get $10 Findtasker Credit.</p>
+                            </div>
+                          </div>
+                        </div> -->
+
+
+                        <!-- <div class="terms text-center">
+                          <p>*Terms &amp; Conditions apply.</p>
+                          <p>*Referral Coupons may be used in the purchase of a Task on the Findtasker Platform. Referred Member must become an Findtasker User and agree to the Findtasker Terms &amp; Conditions. Minimum Task value to receive the benefit conferred by the Referral Coupon is $50. Limit of one Referral Coupon per User &amp; valid only for the first Task Contract created by the Referred Member. Cannot be used with any other        coupon or Findtasker promotion. Referral Coupons are valid for at least 30 days  from issue and Findtasker may change or cancel the terms of the Referral Coupon
+                                 at any time on 30 days' notice.</p><p>The Referring Member will receive a $10 Task credit towards the purchase
+                                 of tasks on the Findtasker Platform, when the Referred Member has completed their
+                                 first Task Contract. The Task credit is valid for 12 months from issue, and is
+                                 valid for the payment of Posted Tasks on the Findtasker Platform. Posted Tasks
+                                 must comply with Terms &amp; Conditions. Limit of 15 x $10 Task credits issued per
+                                 Referring Member. Findtasker may change or cancel the terms of the Task credit
+                                 at any time on 30 days' notice.</p></div> -->
+                      
+                    </div>
+                </div>
+
+		</div>
+</section>
+
+
+
+<%- include ../layouts/footerscripts.ejs %>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/update_profile.js') %>"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+
+<script>
+function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  document.execCommand("copy");
+  
+}
+</script>
+
+<script>
+$("#shareIconsCountInside").jsSocials({
+    url: "<%- site_url('invite-user/') %><%- userdata %>",
+    text: "Google Search Page",
+    showLabel: false,
+    showCount: "inside",
+    shares: ["twitter", "facebook", "googleplus", "linkedin"]
+});
+</script>
+
+

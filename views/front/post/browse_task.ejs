@@ -1,0 +1,509 @@
+<div class="row">
+  <div id="wrapper" class="wrapper clearfix">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSlhXQ8ixpBW6CLmCJWOIvQXmwzXwlbj4&v=3.exp&sensor=false&libraries=places"></script>
+
+    <%- include ../layouts/header.ejs %>
+
+    <%- include ../post/searchbar.ejs %>
+    <!-- #page-title end -->
+
+    <section id="task">
+      <div class="container">
+        <div class="col-md-4">
+          <div class="task-left">
+            <ul class="list locations" style="">
+
+             
+
+              <% browse_task.forEach(function(val) { %>
+              <a href="<%= site_url('post/details/') %><%= val._id %>" class="new-task new-task-open">
+                <div class="new-task-header">
+                  <span class="new-task-title">
+                    <%= val.title %></span>
+                  <div class="new-task-price">
+                    <span>$<%= val.budget %><%= val.budget_type=="total" ? "" : "/"+val.budget_type %></span>
+                  </div>
+                </div>
+                <div class="new-task-body">
+                  <div class="avatar-img new-avatar">
+
+                    <% if (val.user_id.user_image) { %>
+                    <img src="<%- site_url('uploads/user/profile/') %><%= val.user_id.user_image %>" class="img-responsive"
+                      width="32" height="32">
+                    <% } else { %>
+                    <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive" width="32"
+                      height="32">
+                    <% } %>
+
+                  </div>
+                  <div class="new-task-online at-icon-online">
+                    <span class="new-task-detail"><i class="fa fa-dot-circle-o"></i>
+                      <%=val.person_type==2 ? " Remote" : " In Person" %></span>
+                  </div>
+                  <div class="new-task-date at-icon-calendar">
+                    <span class="new-task-detail">
+                      <i class="fa fa-calendar"></i>
+                      <%= convertdate(val.created_at) %>
+                    </span>
+                  </div>
+                </div>
+                <div class="new-task-footer">
+                  <span class="new-task-status">
+                      <% if(val.status==1 && !val.awarded_to){ %>
+                      <label></label>
+											<label class="label label-info">Open</label>
+                    <% }else if(val.awarded_to){ %>
+                      <label></label>
+											<label class="label label-warning">Assigned</label> 
+                    <% }else if(val.status==3){ %>
+                      <label></label>
+											<label class="label label-complete">Completed</label> 
+                    <% } %>
+                  </span>
+                </div>
+              </a>
+              <li style="display:none">
+                <div class="location-name">Place 1</div>
+                <div class="location-address">
+                  <%= val.title %><br>BUDGET:
+                  <%= val.budget %><br><a href="<%= site_url('post/details/') %><%= val._id %>">View Task</a></div>
+
+                <div class="location-lat">
+                  <%= val.location[1] %>
+                </div>
+                <div class="location-lng">
+                  
+                  <%= val.location[0] %>
+                </div>
+              </li>
+
+              <% }); %>
+            </ul>
+
+
+
+
+            <% if(!req.session.Auth){ %>
+            <div class="task-left-footer">
+              <h5 class="text-center">To see more Task</h5>
+              <a href="#" id="signupmode" class="btn btn--primary btn--rounded btn-sm">Join Us</a>
+              or
+              <a href="#" id="loginopen" class="btn btn--primary btn--rounded btn-sm">Login</a>
+            </div>
+            <% } %>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-8">
+          <% if(data){ %>
+          <div class="task-right">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="topbar">
+                  <div class="steps">
+                    <span class="step done">Open</span>
+                    <span class="step done">Assigned</span>
+                    <span class="step"> Completed</span>
+                  </div>
+                  <div class="followbutton">
+                    <a href="#"><i class="fa fa-heart-o"></i> Follow</a>
+                  </div>
+                </div>
+
+                <h2>
+                  <%-data.title %>
+                </h2>
+
+                <div class="post-detail">
+                  <div class="posted-list">
+                    <div class="post-icon">
+                      <img src="https://eu7cmie.cloudimg.io/s/crop/64x64/https://assets-airtasker-com.s3.amazonaws.com/uploads/user/avatar/580396/11156294_10155430289220125_6549823208865804632_n-5acac24617771c12d994e33b26c3143f.jpg"
+                        width="32" height="32px">
+                    </div>
+                    <div class="post-details">
+                      <div class="post-label">Posted by </div>
+                      Nick B.
+                      <span class="pull-right"> 2 hours ago</span>
+                    </div>
+                  </div>
+
+                  <div class="posted-list">
+                    <div class="post-icon">
+                      <i class="fa fa-map-marker"></i>
+                    </div>
+                    <div class="post-details">
+                      <div class="post-label">Location </div>
+                      49 Market St, Sydney NSW 2000 Australia
+                    </div>
+                  </div>
+
+                  <div class="posted-list">
+                    <div class="post-icon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <div class="post-details">
+                      <div class="post-label">Due date </div>
+                      <%-data.created_at %>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-4 task-rightbar">
+                <div class="offer-box">
+                  <h5>Task Budget</h5>
+                  <h4>
+                    <%-data.total %>
+                    <%-data.budget %>
+                  </h4>
+                  <a href="#" class="btn btn--primary btn--rounded">Make an Offer</a>
+                </div>
+
+                <div class="form-group">
+                  <select class="form-control">
+                    <option>More Options</option>
+                    <option>Post a Similar task</option>
+                    <option>Set up Alerts</option>
+                  </select>
+                </div>
+
+                <div class="social-shares">
+
+                  <h6>Share</h6>
+                  <ul class="list-inline">
+                    <li>
+                      <a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-google-plus"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-share-alt"></i></a>
+                    </li>
+                  </ul>
+                </div>
+
+                <a href="#" class="report-task"><i class="fa fa-flag-checkered"></i> Reoprt this task</a>
+
+              </div>
+            </div>
+
+            <div class="post-description">
+              <h6>Detail</h6>
+              <p>
+                <%-data.description %>
+              </p>
+
+            </div>
+
+            <div class="post-offers">
+              <h6>Offers</h6>
+
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="https://eu7cmie.cloudimg.io/s/crop/80x80/https://assets-airtasker-com.s3.amazonaws.com/uploads/user/avatar/1983748/2013-11-19_10-100ab106d24d06430c9089ceca516e52.25.14.jpg"
+                      alt="..." width="40px" height="40px">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <a href="#" class="user-name"> jhon catter</a>
+                  <div class="tasker-status">
+                    <div class="rating">
+                      <img src="assets/images/star.png">
+                      <img src="assets/images/star.png">
+                      <img src="assets/images/star.png">
+                      <img src="assets/images/star.png">
+                      <img src="assets/images/star.png">
+                    </div>
+                    <div class="bid-compliteratio">
+                      <strong>100%</strong> Completion rate
+                    </div>
+                  </div>
+                  <div class="comments">
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                    vulputate fringilla. Donec lacinia congue felis in faucibus.
+                  </div>
+                  <small>2 hour ago</small>
+                </div>
+              </div>
+
+
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="https://eu7cmie.cloudimg.io/s/crop/80x80/https://assets-airtasker-com.s3.amazonaws.com/uploads/user/avatar/1983748/2013-11-19_10-100ab106d24d06430c9089ceca516e52.25.14.jpg"
+                      alt="..." width="40px" height="40px">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <a href="#" class="user-name"> jhon catter</a>
+                  <div class="tasker-status">
+                    <div class="rating">
+                      <img src="assets/images/star.png">
+                      <img src="assets/images/star.png">
+                      <img src="assets/images/star.png">
+                      <img src="assets/images/star.png">
+                      <img src="assets/images/star.png">
+                    </div>
+                    <div class="bid-compliteratio">
+                      <strong>100%</strong> Completion rate
+                    </div>
+                  </div>
+                  <div class="comments">
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                    vulputate fringilla. Donec lacinia congue felis in faucibus.
+                  </div>
+                  <small>2 hour ago</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-activity">
+              <h6>Task Activity</h6>
+
+              <div class="activity-header"> <span>1 Comment About This Task</span></div>
+
+              <p>Comment below for more details and remember that for your safety, not to share personal information
+                e.g. email and phone numbers.</p>
+              <div class="form-group">
+                <textarea class="form-control" name="contact-message" id="message" rows="2" placeholder="Ask NIck a Question"
+                  required="" aria-required="true"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="file">
+              </div>
+
+              <div class="form-group">
+                <button type="button" class="btn btn--primary">Send </button>
+              </div>
+            </div>
+
+          </div>
+          <% }
+            else{ %>
+
+          <div id="map" style="width: 100%; height: 70%;"></div>
+
+          <% } %>
+        </div>
+
+
+
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Get all location addresses and make an array
+    var locations = [];
+
+    $('.locations li').each(function (index, ele) {
+      //geocodeAddress($(ele).find('.location-lat').text(), $(ele).find('.location-lng').text());
+      locations.push([
+        $(ele).find('.location-address').html(),
+        $(ele).find('.location-lat').text(),
+        $(ele).find('.location-lng').text()
+      ]);
+    });
+
+
+    var markers = [];
+
+    function initialize(beaches) {
+      var styles = [
+        {
+          "featureType": "administrative",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#444444"
+            }
+          ]
+        },
+        {
+          "featureType": "landscape",
+          "elementType": "all",
+          "stylers": [
+            {
+              "color": "#f2f2f2"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "all",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "all",
+          "stylers": [
+            {
+              "saturation": -100
+            },
+            {
+              "lightness": 45
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "all",
+          "stylers": [
+            {
+              "visibility": "simplified"
+            }
+          ]
+        },
+        {
+          "featureType": "road.arterial",
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "elementType": "all",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "all",
+          "stylers": [
+            {
+              "color": "#c5dce6"
+            },
+            {
+              "visibility": "on"
+            }
+          ]
+        }
+      ];
+      google.maps.visualRefresh = true;
+      var styledMap = new google.maps.StyledMapType(styles, { name: "Styled Map" });
+      
+      var lat = "<%=  searchJson.location_data.latitude || -25.274398 %>";
+        var lng= "<%=  searchJson.location_data.longitude || 133.77513599999997 %>";
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+
+        center: new google.maps.LatLng(lat,lng),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      map.mapTypes.set('map_style', styledMap);
+      map.setMapTypeId('map_style');
+
+      var infowindow = new google.maps.InfoWindow();
+
+      for (var i = 0; i < beaches.length; i++) {
+
+        var newMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(beaches[i][1], beaches[i][2]),
+          map: map,
+
+        });
+
+        google.maps.event.addListener(newMarker, 'click', (function (newMarker, i) {
+          return function () {
+            infowindow.setContent(beaches[i][0]);
+            infowindow.open(map, newMarker);
+          }
+        })(newMarker, i));
+
+        markers.push(newMarker);
+      }
+    }
+
+    initialize(locations);
+  </script>
+
+  <script src="<%- site_url('front/custom/js/auth/signup.js') %>"></script>
+  <script src="<%- site_url('front/custom/js/auth/forgetpass.js') %>"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.1/bootstrap-slider.min.js"></script>
+
+  <script type="text/javascript" src="<%= site_url('front/custom/js/auth/login.js') %>"></script>
+  <script>
+    $("#ex2").slider({});
+    $(function () {
+      var search_json = "";
+      $('body').on('change', '.srchGbl', function (e) {
+        e.preventDefault();
+        $('#gblSearch').submit();
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    function initializeAutocomplete() {
+      var input = document.getElementById('locality');
+      // var options = {
+      //   types: ['(regions)'],
+      //   componentRestrictions: {country: "IN"}
+      // };
+      var options = {}
+
+      var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+        var placeId = place.place_id;
+        // to set city name, using the locality param
+        var componentForm = {
+          locality: 'short_name',
+        };
+        var val = "";
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            val = place.address_components[i][componentForm[addressType]];
+            $("city").val(val);
+          }
+        }
+
+        $("#latitude").val(lat);
+        $("#longitude").val(lng);
+        $("#location_id").val(placeId);
+
+        $('#gblSearch').submit();
+      });
+    }
+
+    $('body').on('change', '#locality', function (e) {
+      //e.preventDefault();
+      var str = $(this).val();
+      if (str.length == 0) {
+        $("#latitude").val('');
+        $("#longitude").val('');
+        $("#location_id").val('');
+      }
+    });
+
+
+  </script>
+  <%- include ../layouts/footerscripts.ejs %>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.1/css/bootstrap-slider.min.css">

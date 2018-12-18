@@ -1,0 +1,72 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+
+<section id="page-dashbord">
+
+  <div class="container">
+    <div class"row">
+      <%- include ../user/sidebar.ejs %>
+      <div class="col-md-9 col-sm-9 col-xs-12 right-inner">
+     
+        <div class="pageinner">
+          <h5>Notification</h5>
+        </div>
+        <p>Keep up to date with your task</p>
+        <div class="notification">
+          <ul class="list-unstyled">
+            <% if(data.length>=0){
+              data.forEach(function(value){ %>
+            <li>
+              <div class="text">
+                <div class="post-icon">
+                    <% if (value.creator_id.user_image) { %>
+                      <img class="media-object" src="<%= site_url('uploads/user/profile/') %><%-value.creator_id.user_image %>"
+                          alt="avatar" width="40px" height="40px">
+                      <% } else { %>
+                      <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" width="40px" height="40px">
+                      <% } %>
+
+                  
+                </div>
+                <% if(typeof value!="undefined" || value!="null" ) { %>
+                <a class="user-name" href="<%= site_url('profile/') %><%-value.creator_id.first_name %><%-value.creator_id.last_name %>/<%-value.creator_id._id %>">
+                  <%-value.creator_id.first_name %>
+                  <%-value.creator_id.last_name %></a>
+
+                <% if (value.status==0) { %>
+                <p>create a offer On <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                    <%-value.project_id.title%></a> </p>
+                <% } else if (value.status== 1) { %>
+                <p>Award you a project <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                    <%-value.project_id.title%></a></p>
+                <% } else if (value.status== 2) { %>
+                <p>Accept Offer <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                    <%-value.project_id.title%></a></p>
+                <% } else if (value.status== 3) { %>
+                <p>Reject Offer <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                    <%-value.project_id.title%></a></p>
+                <% } else if (value.status== 5) { %>
+                <p>Created a Payment Request <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                    <%-value.project_id.title%></a></p>
+                <% } else if (value.status== 6) { %>
+                <p>you got review for <a href="<%- site_url('post/details/') %><%-value.project_id._id%>">
+                    <%-value.project_id.title%></a></p>
+                <% } %>
+              </div>
+              <div class="time super-small">
+                <small>
+                  <%- convertdate(value.created_at) %></small>
+              </div>
+            </li>
+            <% } %>
+            <% })}else{
+              %>
+            <p>No Records Found</p>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include ../layouts/footerscripts.ejs %>

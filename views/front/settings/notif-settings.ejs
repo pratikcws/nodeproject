@@ -1,0 +1,170 @@
+<%- include ../layouts/header.ejs %>
+<%- include ../functions.ejs %>
+<section id="page-dashbord">
+  <div class="container">
+    <div class="row">
+    <%- include ../user/sidebar.ejs %>
+    
+    <div class="col-md-9 right-inner">
+      <form>
+        <h2>Notification settings</h2>
+          <p>Your notifications can be updated at any time via the options below or the Airtasker App.</p>
+          <p class="user-details">
+            <span class="user-detail">
+            <span class="user-detail-label">Email: </span>prasad.narmadatech@gmail.com<a role="button" href="#">Edit</a></span>
+            <span class="user-detail"><span class="user-detail-label">Mobile: </span><a role="button" href="#">Edit</a></span>
+          </p>
+            
+
+          <div class="notification-setting">
+            <h6>TRANSACTIONAL</h6>
+            <div class="row">
+              <div class="col-sm-8 notification-description">
+                You will always receive important notifications about any payments, cancellations and your account.
+              </div>
+              <div class="col-sm-4 notification-options">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1"> Email
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2"> SMS
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3"> Push
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="notification-setting">
+            <h6>TASK UPDATES</h6>
+            <div class="row">
+              <div class="col-sm-8 notification-description">
+                Receive updates on any new comments, private messages, offers and reviews.
+              </div>
+              <div class="col-sm-4 notification-options">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1"> Email
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2"> SMS
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3"> Push
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-setting">
+            <h6>TASK REMINDERS</h6>
+            <div class="row">
+              <div class="col-sm-8 notification-description">
+                Friendly reminders if you’ve forgotten to accept an offer, release a payment or leave a review.
+              </div>
+              <div class="col-sm-4 notification-options">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1"> Email
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2"> SMS
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3"> Push
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-setting">
+            <h6>AIRTASKER ALERTS</h6>
+            <div class="row">
+              <div class="col-sm-8 notification-description">
+                Once you’ve set up your Airtasker Alerts, you’ll be instantly notified when a task is posted that matches your requirements.
+              </div>
+              <div class="col-sm-4 notification-options">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1"> Email
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2"> SMS
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3"> Push
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-setting">
+            <h6>TASK RECOMMENDATIONS</h6>
+            <div class="row">
+              <div class="col-sm-8 notification-description">
+                Receive recommendations and be inspired by tasks close to you.
+              </div>
+              <div class="col-sm-4 notification-options">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1"> Email
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2"> SMS
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3"> Push
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-setting">
+            <h6>HELPFUL INFORMATION</h6>
+            <div class="row">
+              <div class="col-sm-8 notification-description">
+                Learn about how to earn more and find the right people for your tasks with helpful tips and advice.
+              </div>
+              <div class="col-sm-4 notification-options">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1"> Email
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2"> SMS
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3"> Push
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-setting">
+            <h6>UPDATES & NEWSLETTERS</h6>
+            <div class="row">
+              <div class="col-sm-8 notification-description">
+                Be the first to hear about new features and exciting updates on Airtasker.
+              </div>
+              <div class="col-sm-4 notification-options">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1"> Email
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2"> SMS
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3"> Push
+                </label>
+              </div>
+            </div>
+          </div>
+
+      </form>     
+    </div>
+
+    </div>
+	</div>
+</section>
+<script src="<%= site_url('front/custom/js/index/index.js') %>"></script>
+
+<%- include ../layouts/footerscripts.ejs %>
+
+

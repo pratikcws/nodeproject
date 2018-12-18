@@ -1,0 +1,203 @@
+<%- include ../layouts/header.ejs %>
+<section class="pa4">
+  <div class="container">
+    <h3 class=" text-center">Messaging</h3>
+    <div class="messaging" id="refreshboxid">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h4>Recent</h4>
+            </div>
+            <div class="srch_bar">
+              
+            </div>
+          </div>
+          <div class="inbox_chat">
+
+            <% if(typeof projects != "undefined"){ %>
+            <% projects.forEach(function(projects) { %>
+            <a href="<%= site_url('account/message/') %><%= projects._id%>">
+              <div class="chat_list active_chat">
+                <div class="chat_people">
+                  <div class="chat_img">
+
+                    <% if (projects.from_userid.user_image) { %>
+                    <img src="<%- site_url('uploads/user/profile/') %><%= projects.from_userid.user_image %>" class="img-responsive">
+                    <% } else { %>
+                    <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive">
+                    <% } %>
+                  </div>
+                  <div class="chat_ib">
+                    <h5>
+                      <%= projects.project_id.title %>
+                    </h5>
+                    <span class="username">
+                      <a class="user-name" href="<%= site_url('profile/') %><%= projects.from_userid.first_name +projects.from_userid.last_name %>/<%-projects.from_userid._id %>">
+                        <%= projects.from_userid.first_name + " "+ projects.from_userid.last_name %>
+                      </a>
+
+                    </span>
+                    <span class="chat_date">
+                      <%= convertdate(projects.project_id.created_at) %></span>
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+
+            <% }); %>
+            <% } %>
+
+          </div>
+        </div>
+        <div class="mesgs msg_history">
+          
+          <% if(typeof projectdetail != "undefined"){ %>
+
+
+            <div class="row">
+                <div class="msgheader">
+              <div class="col-md-12">
+                  <div class="col-md-6"> <h6>
+                    <a href="<%= site_url('post/details/' + projectdetail.project_id._id) %>"><%= projectdetail.project_id.title %></a>  
+        
+                    </h6></div>
+                  <div class="col-md-6"><% if(projectdetail.project_id.awarded_to && projectdetail.from_userid._id == req.session.Auth._id && projectdetail.project_id.awarded_to.equals(projectdetail.to_userid._id)  &&  !reviews){%>
+
+                    <% if(transdata){ %>
+                    <a href="<%= site_url('review/rating/' + projectdetail.project_id._id) %>" class="btn btn-success floatright">Review &
+                      Rating </a>
+                    <% } else {%>
+                    <a href="<%= site_url('post/complete/payment/'+projectdetail.project_id._id) %>" class="btn btn-success  floatright projectCompleted">Complete
+                      A Project</a>
+                    <% } %>
+                    <% } else if(projectdetail.project_id.awarded_to && projectdetail.project_id.awarded_to.equals(req.session.Auth._id) ){%>
+                    <% if(!transdata || transdata.payment_status !=1){%>
+                    <a href="#" data-project="<%-projectdetail.project_id._id %>" data-user="<%-projectdetail.from_userid._id %>"
+                      to_userid="<%-projectdetail.to_userid._id %>" class="btn btn-primary btn-rounded btn-sm floatright paymentRequest"
+                      data-status="2">Payment Request </a>
+                    <% } else if(transdata && transdata.payment_status ==1){%>
+                    <a href="<%= site_url('review/rating/' + projectdetail.project_id._id) %>" class="btn btn-success floatright">Review &
+                      Rating </a>
+                    <%} %>
+                    <%} %></div>
+              </div> 
+              </div>
+            </div>
+           
+            
+
+
+         
+
+
+          <% if(messages != "undefined"){ %>
+          <div id="all_msg" >
+          <% messages.forEach(function(msg) { %>
+          <% if(msg.from_user_id._id == req.session.Auth._id) {%>
+          <% if (msg.from_user_id.user_image) { %>
+          <img src="<%- site_url('uploads/user/profile/') %><%= msg.from_user_id.user_image%>" style="height:42px; width:42px; float: right; border-radius:50px;">
+          <%} else{ %>
+          <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" style="height:42px;    margin: 16px; width:42px; float: right; border-radius:50px;">
+          <% } %>
+          <div class="outgoing_msg">
+            <div class="sent_msg">
+              <p>
+                <%= msg.message %>
+              </p>
+              <span class="time_date">
+                <%= convertdate(msg.created_at)%> </span>
+            </div>
+          </div>
+          <% } else { %>
+          <div class="incoming_msg">
+            <% if(msg.from_user_id._id == req.session.Auth._id) {%>
+
+            <div class="incoming_msg_img">
+              <% if (msg.to_user_id.user_image) { %>
+              <img src="<%- site_url('uploads/user/profile/') %><%= msg.to_user_id.user_image%>" style="">
+              <%} else{ %>
+              <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive">
+              <% } %>
+              <%} else {%>
+
+              <div class="incoming_msg_img">
+                <% if (msg.from_user_id.user_image) { %>
+                <img src="<%- site_url('uploads/user/profile/') %><%= msg.from_user_id.user_image%>" style="">
+                <%} else{ %>
+                <img alt="" src="<%= site_url('front/assets/images/avtar.jpg') %>" class="img-responsive">
+                <% } %>
+                <%}%>
+                <!-- <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> -->
+              </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>
+                    <%= msg.message %>
+                  </p>
+                  <span class="time_date">
+                    <%= convertdate(msg.created_at)%> </span>
+                </div>
+              </div>
+            </div>
+
+            <% } %>
+
+
+            <% }); %>
+            <% } %>
+
+          </div>
+
+            <div class="type_msg">
+              <div class="input_msg_write">
+                <form action="#" name="msg" id="msg">
+                  <input type="hidden" name="from_user_id" id="from_user_id" value="<%= req.session.Auth._id%>">
+                  <input type="hidden" name="project_id" id="project_id" value="<%= projectdetail.project_id._id%>">
+                  <input type="hidden" name="msg_head_id" id="msg_head_id" value="<%= projectdetail._id%>">
+                  <% if(req.session.Auth._id == projectdetail.to_userid._id){ %>
+                  <input type="hidden" name="to_user_id" id="to_user_id" value="<%= projectdetail.from_userid._id %>">
+                  <% } else{ %>
+                  <input type="hidden" name="to_user_id" id="to_user_id" value="<%= projectdetail.to_userid._id %>">
+                  <% } %>
+                  <input type="text" class="write_msg" name="message" placeholder="Type a message" />
+
+                  <!----<button class="attachment_btn" type="button"><i class="fa fa-paperclip attachment" aria-hidden="true"></i></button>-->
+
+                  <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                </form>
+              </div>
+            </div>
+            <script>
+              var msgheadid="<%= projectdetail ? projectdetail._id : ''  %>";
+              </script>
+
+            <% } else{ %>
+            please select a project to start a chat
+            <% } %>
+
+          </div>
+        </div>
+      </div>
+</section>
+<%- include ../layouts/footerscripts.ejs %>
+<script type="text/javascript" src="<%- site_url('front/custom/js/app.js') %>"></script>
+<script src="<%= site_url('front/custom/js/post/makeanoffer.js') %>"></script>
+<script type="text/javascript" src="<%- site_url('front/custom/js/user/message.js') %>"></script>
+<script>
+
+  $(function () {
+    window.scrollTo(0, document.body.scrollHeight);
+    $('body').on('click', '.projectCompleted', function (e) {
+      e.preventDefault();
+      var redirect_link = $(this).attr('href');
+      var ve_s = confirm('Are ready for complete your project ?');
+      if (ve_s) {
+        window.location.href = redirect_link;
+      }
+    });
+  });
+
+</script>
